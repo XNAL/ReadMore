@@ -1,7 +1,8 @@
 import axios from 'axios';
 import qs from 'qs';
 
-axios.defaults.baseURL = 'http://api.zhuishushenqi.com';
+// axios.defaults.baseURL = 'http://api.zhuishushenqi.com';
+axios.defaults.baseURL = '/api';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.timeout = 5000;
 
@@ -17,7 +18,7 @@ axios.interceptors.request.use((config) => {
 
 // Add a response interceptor
 axios.interceptors.response.use((response) => {
-    if (!response.data.success) {
+    if (!response.status === 200) {
         return Promise.reject(response);
     }
     return response;
@@ -39,7 +40,7 @@ export default async(url = '', data = {}, method = 'get') => {
         return new Promise((resolve, reject) => {
             axios.get(url)
                 .then(response => {
-                    resolve(response.data);
+                    resolve(response.data.data);
                 }, err => {
                     reject(err);
                 })
@@ -51,7 +52,7 @@ export default async(url = '', data = {}, method = 'get') => {
         return new Promise((resolve, reject) => {
             axios.post(url, params)
                 .then(response => {
-                    resolve(response.data);
+                    resolve(response.data.data);
                 }, err => {
                     reject(err);
                 })
