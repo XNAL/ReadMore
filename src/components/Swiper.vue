@@ -2,7 +2,7 @@
     <section class="swiper-banner">
       <swiper :options="swiperOption">
         <swiper-slide v-for="slide in swiperSlides" :key="slide._id">
-            <router-link :to="{ name: slide.link, params: {} }">
+            <router-link :to="{ name: slide.link }">
                 <img :src="slide.img" :alt="slide.title">
             </router-link>
         </swiper-slide>

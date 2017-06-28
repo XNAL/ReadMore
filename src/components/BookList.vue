@@ -55,7 +55,7 @@ export default {
 .book-list {
     position: relative;
     margin-bottom: 10px;
-    padding: 15px;
+    padding: 15px 0 0 15px;
     background: #fff;
 }
 
@@ -77,7 +77,7 @@ export default {
         a {
             position: absolute;
             top: 1px;
-            right: 0;
+            right: 15px;
             font-size: 14px;
 
             &::after {
@@ -90,11 +90,12 @@ export default {
 }
 
 .book-list-content {
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .book-list-li {
-    margin: 10px 0;
+    padding: 10px 15px 10px 0;
+    border-bottom: 1px solid #f0f1f2;
     a {
         display: block;
         overflow: hidden;
@@ -131,7 +132,7 @@ export default {
                 font-size: 14px;
             }
             .book-tags {
-                margin: 2px 0;
+                margin: 3px 0;
             }
             em.small-tag {
                 font-size: 10px;

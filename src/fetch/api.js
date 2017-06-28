@@ -1,7 +1,7 @@
 import async from './fetch';
 
 export default {
-    getHomeData() {
+    getFeaturedData() {
         return async('/recommendPage/nodes/5910018c8094b1e228e5868f');
     },
 

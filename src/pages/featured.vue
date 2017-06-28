@@ -1,11 +1,11 @@
 <template>
-    <div class="home">
+    <div class="featured">
       <!-- 首页
       <button type="button" name="button" @click="getHomeData">点击查看数据</button> -->
         <div class="swiper">
             <swiper></swiper>
         </div>
-        <div>
+        <div class="featured-book-list">
             <book-list v-for="module in modules" :book-info="module" v-if="module.type === 0" :key="module._id"></book-list>
         </div>
         <tabbar></tabbar>
@@ -19,7 +19,7 @@ import swiper from '@/components/Swiper';
 import tabbar from '@/components/Tabbar';
 
 export default {
-  name: 'home',
+  name: 'featured',
   components: {
       swiper,
       bookList,
@@ -31,7 +31,7 @@ export default {
     };
   },
   created: function() {
-    api.getHomeData()
+    api.getFeaturedData()
       .then(data => {
         this.modules = data;
       })
@@ -40,5 +40,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+    .featured-book-list {
+        margin-bottom: 70px;
+    }
 </style>

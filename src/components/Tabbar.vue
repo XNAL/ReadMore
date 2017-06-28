@@ -1,6 +1,6 @@
 <template>
     <section class="tabbar">
-        <router-link :to="{ name: '', params: {} }" class="tab-item">
+        <router-link :to="{ name: 'shelf' }" :class="['tab-item', { active: $route.path.indexOf('shelf') !== -1}]">
             <div class="tab-item-icon">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-shujia"></use>
@@ -8,7 +8,7 @@
             </div>
             <p class="tab-item-label">书架</p>
         </router-link>
-        <router-link :to="{ name: '', params: {} }" class="tab-item">
+        <router-link :to="{ name: 'featured' }" :class="['tab-item',{ active: $route.path.indexOf('featured') !== -1}]">
             <div class="tab-item-icon">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-jingxuan"></use>
@@ -16,7 +16,7 @@
             </div>
             <p class="tab-item-label">精选</p>
         </router-link>
-        <router-link :to="{ name: '', params: {} }" class="tab-item">
+        <router-link :to="{ name: 'category' }" :class="['tab-item', { active: $route.path.indexOf('category') !== -1}]">
             <div class="tab-item-icon">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-fenlei"></use>
@@ -24,7 +24,7 @@
             </div>
             <p class="tab-item-label">分类</p>
         </router-link>
-        <router-link :to="{ name: '', params: {} }" class="tab-item">
+        <router-link :to="{ name: 'rank' }" :class="['tab-item', { active: $route.path.indexOf('rank') !== -1}]">
             <div class="tab-item-icon">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-paihang"></use>
@@ -60,6 +60,10 @@ export default {
         display: block;
         flex: 1;
         padding: 10px 0;
+
+        &.active {
+            color: #ed424b;
+        }
     }
 
     .tab-item-icon {

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/pages/home'
+import Featured from '@/pages/featured'
 
 Vue.use(Router)
 
@@ -9,8 +9,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'featured',
+      component: Featured
+    },
+    {
+      path: '/featured',
+      name: 'featured',
+      component: Featured
     }
   ]
 })
