@@ -7,5 +7,9 @@ export default {
 
     getBooks(id) {
         return async('/recommendPage/books/'+ id);
+    },
+
+    getSwiperPictures() {
+        return async('/recommendPage/node/spread/575f74f27a4a60dc78a435a3', { pl: 'ios' });
     }
 }
