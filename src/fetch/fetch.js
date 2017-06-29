@@ -4,7 +4,7 @@ import qs from 'qs';
 // axios.defaults.baseURL = 'http://api.zhuishushenqi.com';
 axios.defaults.baseURL = '/api';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-axios.defaults.timeout = 10000;
+axios.defaults.timeout = 20000;
 
 // Add a request interceptor
 axios.interceptors.request.use((config) => {
@@ -40,7 +40,7 @@ export default async(url = '', data = {}, method = 'get') => {
         return new Promise((resolve, reject) => {
             axios.get(url)
                 .then(response => {
-                    resolve(response.data.data);
+                    resolve(response.data);
                 }, err => {
                     reject(err);
                 })
