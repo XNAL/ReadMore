@@ -1,7 +1,7 @@
 <template>
     <section class="book-list">
         <div class="book-list-top">
-            <h2 class="book-list-title">{{ bookInfo.title }}-{{ bookInfo.type}}-{{ bookInfo.order }}</h2>
+            <h2 class="book-list-title">{{ bookInfo.title }}</h2>
             <div class="book-list-more fr">
                 <router-link :to="{ name: 'list/' + bookInfo._id, params: {} }" class="gray">更多</router-link>
             </div>

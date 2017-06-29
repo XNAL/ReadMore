@@ -8,7 +8,7 @@
             </div>
             <p class="tab-item-label">书架</p>
         </router-link>
-        <router-link :to="{ name: 'featured' }" :class="['tab-item',{ active: $route.path.indexOf('featured') !== -1}]">
+        <router-link :to="{ name: 'featured', params: { sex: 'male' } }" :class="['tab-item',{ active: $route.path.indexOf('featured') !== -1}]">
             <div class="tab-item-icon">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-jingxuan"></use>

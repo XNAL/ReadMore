@@ -7,13 +7,13 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   routes: [
+    // {
+    //   path: '/',
+    //   name: 'featured',
+    //   component: Featured
+    // },
     {
-      path: '/',
-      name: 'featured',
-      component: Featured
-    },
-    {
-      path: '/featured',
+      path: '/featured/:sex',
       name: 'featured',
       component: Featured
     }
