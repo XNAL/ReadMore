@@ -18,5 +18,13 @@ export default {
 
     getCategory() {
         return async('/cats/lv2/statistics');
+    },
+
+    getRanks() {
+        return async('/ranking/gender');
+    },
+
+    getRankBooks(id) {
+        return async('/ranking/'+ id);
     }
 }

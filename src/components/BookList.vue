@@ -1,11 +1,5 @@
 <template>
     <section class="book-list">
-        <div class="book-list-top">
-            <h2 class="book-list-title">{{ bookInfo.title }}</h2>
-            <div class="book-list-more fr">
-                <router-link :to="{ name: 'list/' + bookInfo._id, params: {} }" class="gray">更多</router-link>
-            </div>
-        </div>
         <ol class="book-list-content">
             <li class="book-list-li" v-for="list in bookList">
                 <router-link :to="{ name: 'book', params: {id: list.book._id} }">
@@ -43,10 +37,17 @@ export default {
         }
     },
     created: function () {
-        api.getBooks(this.bookInfo._id)
-            .then(data => {
-                this.bookList = data;
-            })
+        if (this.bookInfo.type === 'rank') {
+            api.getRankBooks(this.bookInfo.id)
+                .then(data => {
+                    this.bookList = data;
+                })
+        } else {
+            api.getBooks(this.bookInfo.id)
+                .then(data => {
+                    this.bookList = data;
+                })
+        }
     }
 }
 </script>
@@ -54,41 +55,7 @@ export default {
 <style scoped lang="scss">
 .book-list {
     position: relative;
-    margin-bottom: 10px;
-    padding: 15px 0 0 15px;
-    background: #fff;
 }
-
-.book-list-top {
-    position: relative;
-    overflow: hidden;
-
-    .book-list-title {
-        font-weight: 400;
-        display: inline-block;
-        color: #33373d;
-        line-height: 1;
-        border-left: 2px solid #ed424b;
-        padding-left: 8px;
-    }
-    .book-list-more {
-        display: inline-block;
-
-        a {
-            position: absolute;
-            top: 1px;
-            right: 15px;
-            font-size: 14px;
-
-            &::after {
-                content: '>';
-                display: inline-block;
-                margin-left: 5px;
-            }
-        }
-    }
-}
-
 .book-list-content {
     margin-top: 5px;
 }

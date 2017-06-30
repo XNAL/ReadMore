@@ -3,7 +3,15 @@
 	<headerBar :sex="sex"></headerBar>
 	<div class="featured-book-list">
 		<swiper></swiper>
-		<book-list v-for="module in modules" :book-info="module" v-if="module.type === 0" :key="module._id"></book-list>
+		<section class="book-list-section" v-for="module in modules" v-if="module.type === 0" :key="module._id">
+			<div class="book-list-top">
+	            <h2 class="book-list-title">{{ module.title }}</h2>
+	            <div class="book-list-more fr">
+	                <router-link :to="{ name: 'list/' + module._id, params: {} }" class="gray">更多</router-link>
+	            </div>
+	        </div>
+			<book-list :book-info="{ id: module._id }" ></book-list>
+		</section>
 	</div>
 	<tabbar></tabbar>
 </div>
@@ -66,5 +74,42 @@ export default {
 <style scoped lang="scss">
 .featured-book-list {
     margin-bottom: 70px;
+}
+
+.book-list-section {
+    position: relative;
+    margin-bottom: 10px;
+    padding: 15px 0 0 15px;
+    background: #fff;
+}
+
+.book-list-top {
+    position: relative;
+    overflow: hidden;
+
+    .book-list-title {
+        font-weight: 400;
+        display: inline-block;
+        color: #33373d;
+        line-height: 1;
+        border-left: 2px solid #ed424b;
+        padding-left: 8px;
+    }
+    .book-list-more {
+        display: inline-block;
+
+        a {
+            position: absolute;
+            top: 1px;
+            right: 15px;
+            font-size: 14px;
+
+            &::after {
+                content: '>';
+                display: inline-block;
+                margin-left: 5px;
+            }
+        }
+    }
 }
 </style>

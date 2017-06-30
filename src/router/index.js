@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Featured from '@/pages/featured';
 import Category from '@/pages/category';
+import Rank from '@/pages/rank';
 
 Vue.use(Router);
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/category',
       name: 'category',
       component: Category
+    },
+    {
+      path: '/rank',
+      name: 'rank',
+      component: Rank
     }
   ]
 })
