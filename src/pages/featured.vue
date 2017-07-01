@@ -10,7 +10,7 @@
 	                <router-link :to="{ name: 'list/' + module._id, params: {} }" class="gray">更多</router-link>
 	            </div>
 	        </div>
-			<book-list :book-info="{ id: module._id }" ></book-list>
+			<book-list :book-info="{ id: module._id, type: 'featured' }" ></book-list>
 		</section>
 	</div>
 	<tabbar></tabbar>
@@ -84,7 +84,8 @@ export default {
 }
 
 .book-list-top {
-    position: relative;
+    position: relative;	
+    margin-bottom: 5px;
     overflow: hidden;
 
     .book-list-title {

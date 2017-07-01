@@ -1,7 +1,7 @@
 <template>
     <div class="category">
         <div class="cat-section">
-            <cat v-for="category in categories" :category="category" v-if="category !== null"></cat>
+            <cat v-for="category in categories" :category="category" v-if="category !== null" :key="category.title"></cat>
         </div>
         <tabbar></tabbar>
     </div>

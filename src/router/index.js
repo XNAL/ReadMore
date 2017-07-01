@@ -15,6 +15,12 @@ export default new Router({
     //   component: Featured
     // },
     {
+      path: '/featured',
+      name: 'defaultFeatured',
+      redirect: '/featured/male',
+      component: Featured
+    },
+    {
       path: '/featured/:sex',
       name: 'featured',
       component: Featured
@@ -28,6 +34,17 @@ export default new Router({
       path: '/rank',
       name: 'rank',
       component: Rank
+    },
+    {
+      path: '/rank/:id',
+      name: 'ranklist',
+      component: Rank
     }
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    return {
+      x: 0,
+      y: 0
+    }
+  }
 })
