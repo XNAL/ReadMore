@@ -1,7 +1,7 @@
 <template>
 <header class="header">
 	<router-link :to="{ name: '' }" class="header-logo">
-		<h2 class="logo">多读书</h2>
+		<h2 class="logo">RM</h2>
 	</router-link>
 	<nav class="nav-group">
 		<h3 :class="['nav-item', { active: sex === 'male' }]">
@@ -50,6 +50,7 @@ export default {
         left: 15px;
 
         h2 {
+            color: #ed424b;
             line-height: 20px;
         }
     }

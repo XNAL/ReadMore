@@ -1,28 +1,29 @@
 <template>
-    <section class="book-list-comm">
+    <section class="book-home-list">
         <ol class="book-list-content">
-            <li class="book-list-li book-list-li-comm" v-for="book in bookList" :key="book._id">
-                <router-link :to="{ name: 'book', params: {id: book._id} }">
-                    <img class="book-list-book-cover fl" :src="book.cover.indexOf('http://statics.zhuishushenqi.com') !== -1 ? book.cover: 'http://statics.zhuishushenqi.com' + book.cover">
+            <li class="book-list-li" v-for="list in bookList" :key="list.book._id">
+                <router-link :to="{ name: 'book', params: {id: list.book._id} }">
+                    <img class="book-list-book-cover fl" :src="list.book.cover">
                     <div class="book-list-book-info">
-                        <h3 class="book-title">{{ book.title }}</h3>
-                        <p class="book-summary text-line-comm gray">{{ book.shortIntro }}</p>
+                        <h3 class="book-title">{{ list.book.title }}</h3>
+                        <p class="book-summary text-line-comm gray">{{ list.book.shortIntro }}</p>
                         <p class="book-info">
                             <span class="book-author fl gray">
                                 <svg class="icon" aria-hidden="true">
                                     <use xlink:href="#icon-author"></use>
-                                </svg>{{ book.author }}
+                                </svg>{{ list.book.author }}
                             </span>
                             <span class="book-tags fr">
-                                <em class="small-tag red">{{ parseFloat(book.retentionRatio).toFixed(1) }}%留存</em>
-                                <em class="small-tag blue">{{ book.latelyFollower
-                                    < 10000 ? book.latelyFollower : (book.latelyFollower / 10000).toFixed(1) + '万'}}人气</em>
+                                <em class="small-tag gray">{{ list.book.majorCate }}</em>
+                                <em class="small-tag red">{{ list.book.isSerial ? '完结' : '连载中' }}</em>
+                                <em class="small-tag blue">{{ list.book.latelyFollower }}人气</em>
                             </span>
                         </p>
                     </div>
                 </router-link>
             </li>
         </ol>
+    
     </section>
 </template>
 
@@ -32,48 +33,38 @@ import api from '../fetch/api';
 export default {
     name: 'bookList',
     props: {
-        bookList: Array
+        bookInfo: Object
     },
     data() {
         return {
-
+            bookList: []
         }
     },
     watch: {
-        // 'bookInfo': 'fetchData'
+        'bookInfo': 'fetchData'
     },
     created: function () {
-        // this.fetchData();
+        this.fetchData();
     },
     methods: {
         fetchData: function () {
-            if (this.bookInfo.type === 'rank') {
-                api.getRankBooks(this.bookInfo.id)
-                    .then(data => {
-                        this.bookList = data.ranking.books;
-                    })
-            } else {
-                api.getBooks(this.bookInfo.id)
-                    .then(data => {
-                        this.bookList = data;
-                    })
-            }
+            api.getBooks(this.bookInfo.id)
+                .then(data => {
+                    this.bookList = data;
+                })
         }
     }
 }
 </script>
 
 <style scoped lang="scss">
-.book-list-comm {
+.book-home-list {
     position: relative;
+
 
     .book-list-li {
         padding: 10px 15px 10px 0;
         border-bottom: 1px solid #f0f1f2;
-
-        &.book-list-li-comm {
-            padding-left: 10px;
-        }
 
         a {
             display: block;

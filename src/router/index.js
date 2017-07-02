@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Featured from '@/pages/featured';
 import Category from '@/pages/category';
 import Rank from '@/pages/rank';
+import List from '@/pages/list';
 
 Vue.use(Router);
 
@@ -39,12 +40,17 @@ export default new Router({
       path: '/rank/:id',
       name: 'ranklist',
       component: Rank
+    },
+    {
+      path: '/list/:id',
+      name: 'list',
+      component: List
     }
-  ],
-  scrollBehavior(to, from, savedPosition) {
-    return {
-      x: 0,
-      y: 0
-    }
-  }
+  ]
+  // scrollBehavior(to, from, savedPosition) {
+  //   return {
+  //     x: 0,
+  //     y: 0
+  //   }
+  // }
 })

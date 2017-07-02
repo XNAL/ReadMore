@@ -7,10 +7,10 @@
 			<div class="book-list-top">
 	            <h2 class="book-list-title">{{ module.title }}</h2>
 	            <div class="book-list-more fr">
-	                <router-link :to="{ name: 'list/' + module._id, params: {} }" class="gray">更多</router-link>
+	                <router-link :to="{ name: 'list', params: {id : module._id} }" class="gray">更多</router-link>
 	            </div>
 	        </div>
-			<book-list :book-info="{ id: module._id, type: 'featured' }" ></book-list>
+			<home-list :book-info="{ id: module._id }" ></home-list>
 		</section>
 	</div>
 	<tabbar></tabbar>
@@ -19,7 +19,7 @@
 
 <script>
 import api from '../fetch/api';
-import bookList from '@/components/BookList';
+import homeList from '@/components/HomeList';
 import swiper from '@/components/Swiper';
 import tabbar from '@/components/Tabbar';
 import headerBar from '@/components/Header';
@@ -29,7 +29,7 @@ export default {
 	components: {
 		headerBar,
 		swiper,
-		bookList,
+		homeList,
 		tabbar
 	},
 	data() {

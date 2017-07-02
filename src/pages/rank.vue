@@ -8,7 +8,7 @@
 			</ul>
 		</section>
 		<section class="book-list-section">
-			<book-list :book-info="{ id: rankId, type: 'rank' }" v-if="rankId !== ''"></book-list>
+			<book-list :book-list="bookList" v-if="bookList.length > 0"></book-list>
 		</section>
 	
 		<tabbar></tabbar>
@@ -30,11 +30,18 @@ export default {
 		return {
 			rankList: [],
 			rankId: '',
-			isDefaultFirst: false
+			isDefaultFirst: false,
+			bookList: []
 		};
 	},
 	watch: {
-		'$route': 'fetchData'
+		'$route': 'fetchData',
+		rankId: function () {
+			api.getRankBooks(this.rankId)
+				.then(data => {
+					this.bookList = data.ranking.books;
+				})
+		}
 	},
 	created() {
 		this.fetchData();

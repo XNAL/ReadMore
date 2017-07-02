@@ -26,15 +26,15 @@ axios.interceptors.response.use((response) => {
     return Promise.reject(error);
 });
 
-export default async(url = '', data = {}, method = 'get') => {
+export default async(url = '', params = {}, method = 'get') => {
     method = method.toLowerCase();
     if (method === 'get') {
-        let dataArr = []; //数据拼接字符串
-        for (let [key, value] of Object.entries(data)) {
-            dataArr.push(key + '=' + value);
+        let paramArr = []; //数据拼接字符串
+        for (let [key, value] of Object.entries(params)) {
+            paramArr.push(key + '=' + value);
         }
-        if (dataArr.length > 0) {
-            url += '?' + dataArr.join('&');
+        if (paramArr.length > 0) {
+            url += '?' + paramArr.join('&');
         }
 
         return new Promise((resolve, reject) => {
