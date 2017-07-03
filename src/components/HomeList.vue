@@ -1,66 +1,71 @@
 <template>
-    <section class="book-home-list">
-        <ol class="book-list-content">
-            <li class="book-list-li" v-for="list in bookList" :key="list.book._id">
-                <router-link :to="{ name: 'book', params: {id: list.book._id} }">
-                    <img class="book-list-book-cover fl" :src="list.book.cover">
-                    <div class="book-list-book-info">
-                        <h3 class="book-title">{{ list.book.title }}</h3>
-                        <p class="book-summary text-line-comm gray">{{ list.book.shortIntro }}</p>
-                        <p class="book-info">
-                            <span class="book-author fl gray">
-                                <svg class="icon" aria-hidden="true">
-                                    <use xlink:href="#icon-author"></use>
-                                </svg>{{ list.book.author }}
-                            </span>
-                            <span class="book-tags fr">
-                                <em class="small-tag gray">{{ list.book.majorCate }}</em>
-                                <em class="small-tag red">{{ list.book.isSerial ? '完结' : '连载中' }}</em>
-                                <em class="small-tag blue">{{ list.book.latelyFollower }}人气</em>
-                            </span>
-                        </p>
-                    </div>
-                </router-link>
-            </li>
-        </ol>
-    
-    </section>
+<section class="book-home-list">
+	<ol class="book-list-content">
+		<li class="book-list-li" v-for="book in bookList" :key="book._id">
+			<router-link :to="{ name: 'book', params: {id: book._id} }">
+				<img class="book-list-book-cover fl" :src="book.cover">
+				<div class="book-list-book-info">
+					<h3 class="book-title">{{ book.title }}</h3>
+					<p class="book-summary text-line-comm gray">{{ book.shortIntro }}</p>
+					<p class="book-info">
+						<span class="book-author fl gray">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-author"></use>
+                            </svg>{{ book.author }}
+                        </span>
+						<span class="book-tags fr">
+                            <em class="small-tag gray">{{ book.majorCate }}</em>
+                            <em class="small-tag red">{{ book.isSerial ? '完结' : '连载中' }}</em>
+                            <em class="small-tag blue">{{ book.latelyFollower }}人气</em>
+                        </span>
+					</p>
+				</div>
+			</router-link>
+		</li>
+	</ol>
+
+</section>
 </template>
 
 <script>
 import api from '../fetch/api';
 
 export default {
-    name: 'bookList',
-    props: {
-        bookInfo: Object
-    },
-    data() {
-        return {
-            bookList: []
-        }
-    },
-    watch: {
-        'bookInfo': 'fetchData'
-    },
-    created: function () {
-        this.fetchData();
-    },
-    methods: {
-        fetchData: function () {
-            api.getBooks(this.bookInfo.id)
-                .then(data => {
-                    this.bookList = data;
-                })
-        }
-    }
+	name: 'bookList',
+	props: {
+		bookInfo: Object
+	},
+	data() {
+		return {
+			bookList: []
+		}
+	},
+	watch: {
+		'bookInfo': 'fetchData'
+	},
+	created: function() {
+		this.fetchData();
+	},
+	methods: {
+		fetchData: function() {
+			api.getBooks(this.bookInfo.id)
+				.then(data => {
+					data = data.map(value => {
+						return value.book;
+					});
+					return data;
+				})
+				.then(data => {
+					this.bookList = data;
+				})
+		}
+	}
 }
 </script>
 
 <style scoped lang="scss">
 .book-home-list {
     position: relative;
-
 
     .book-list-li {
         padding: 10px 15px 10px 0;

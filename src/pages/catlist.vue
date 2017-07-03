@@ -1,5 +1,5 @@
 <template>
-<section class="list-section" id="listId">
+<section class="catlist-section" id="catListId">
 	<backbar :title="title"></backbar>
 	<book-list :book-list="list" v-if="list.length > 0"></book-list>
 	<list-loading v-show="isLoading"></list-loading>
@@ -14,18 +14,21 @@ import backbar from '@/components/Backbar';
 import listLoading from '@/components/ListLoading';
 
 export default {
-	name: 'list',
+	name: 'catlist',
 	components: {
-		bookList,
 		backbar,
+		bookList,
 		listLoading
 	},
 	data() {
 		return {
-			id: '',
-			list: [],
 			title: '',
-			page: 1,
+			list: [],
+			start: 0,
+			gender: '',
+			type = '',
+			major = '',
+			minor = '',
 			isLoading: false,
 			isEnding: false,
 			$body: null,
@@ -33,26 +36,24 @@ export default {
 			clientHeight: 0
 		}
 	},
-	created: function() {
-		this.id = this.$route.params.id;
-		this.fetchData();
+	created() {
+
 	},
-	mounted: function() {
+	mounted() {
 		this.$body = document.body;
 		this.clientHeight = this.$body.clientHeight;
-		this.$list = document.getElementById('listId');
+		this.$list = document.getElementById('catListId');
 		window.addEventListener('scroll', loadMore.debounce(this.loadMoreBooks));
 	},
 	methods: {
-		fetchData: function() {
-			api.getBookList(this.id, this.page)
+		fetchCatList: function() {
+			api.getCatList()
 				.then(data => {
-                    this.title = data[0].node.title;
-					data = data.map(value => {
-						return value.book;
-					});
-					return data;
+					
 				})
+		},
+		fetchData: function() {
+			api.getCatBooks(this.gender, this.type, this.major, this.minor, this.start)
 				.then(data => {
 					if (data.length < 10) {
 						this.isEnding = true;
@@ -68,7 +69,7 @@ export default {
 				if (this.isEnding === true) {
 					return;
 				}
-				this.page++;
+				this.start++;
 				this.isLoading = true;
 				this.fetchData();
 			}
@@ -78,7 +79,5 @@ export default {
 </script>
 
 <style lang="scss">
-.list-section {
-    margin-top: 40px;
-}
+Error: Source sample is missing.
 </style>
