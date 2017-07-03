@@ -24,12 +24,13 @@ export default {
 		return {
 			title: '',
 			list: [],
-			start: 0,
+			page: 0,
+			limit: 20,
 			gender: '',
-			type = '',
-			major = '',
-			minor = '',
-			isLoading: false,
+			type: 'hot',
+			major: '',
+			minor: '',
+			isLoading: true,
 			isEnding: false,
 			$body: null,
 			$list: null,
@@ -37,7 +38,9 @@ export default {
 		}
 	},
 	created() {
-
+		this.gender = this.$route.query.gender;
+		this.title = this.major = this.$route.params.major;
+		this.fetchData();
 	},
 	mounted() {
 		this.$body = document.body;
@@ -53,9 +56,9 @@ export default {
 				})
 		},
 		fetchData: function() {
-			api.getCatBooks(this.gender, this.type, this.major, this.minor, this.start)
+			api.getCatBooks(this.gender, this.type, this.major, this.minor, this.page * this.limit)
 				.then(data => {
-					if (data.length < 10) {
+					if (data.length < this.limit) {
 						this.isEnding = true;
 					}
 					this.list.push(...data);
@@ -69,7 +72,7 @@ export default {
 				if (this.isEnding === true) {
 					return;
 				}
-				this.start++;
+				this.page++;
 				this.isLoading = true;
 				this.fetchData();
 			}
@@ -79,5 +82,7 @@ export default {
 </script>
 
 <style lang="scss">
-Error: Source sample is missing.
+.catlist-section {
+    padding-top: 40px;
+}
 </style>

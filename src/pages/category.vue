@@ -32,18 +32,21 @@ export default {
                         case 'male':
                             obj = {
                                 title: '男生',
+                                gender: 'male',
                                 catList: value
                             };
                             break;
                         case 'female':
                             obj = {
                                 title: '女生',
+                                gender: 'female',
                                 catList: value
                             };
                             break;
                         case 'press':
                             obj = {
                                 title: '出版',
+                                gender: 'press',
                                 catList: value
                             };
                             break;

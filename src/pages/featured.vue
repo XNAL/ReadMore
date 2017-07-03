@@ -73,12 +73,13 @@ export default {
 
 <style scoped lang="scss">
 .featured-book-list {
-    margin-bottom: 70px;
+    margin-bottom: 60px;
 }
 
 .book-list-section {
     position: relative;
-    margin-bottom: 10px;
+    //margin-bottom: 10px;
+	border-bottom: 10px solid #f6f7f9;
     padding: 15px 0 0 15px;
     background: #fff;
 }

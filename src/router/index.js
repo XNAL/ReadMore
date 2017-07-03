@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Featured from '@/pages/featured';
 import Category from '@/pages/category';
+import CatList from '@/pages/catlist';
 import Rank from '@/pages/rank';
 import List from '@/pages/list';
 
@@ -30,6 +31,11 @@ export default new Router({
       path: '/category',
       name: 'category',
       component: Category
+    },
+    {
+      path: '/catlist/:major',
+      name: 'catlist',
+      component: CatList
     },
     {
       path: '/rank',

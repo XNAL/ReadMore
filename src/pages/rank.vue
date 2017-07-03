@@ -9,6 +9,7 @@
 		</section>
 		<section class="book-list-section">
 			<book-list :book-list="bookList" v-if="bookList.length > 0"></book-list>
+			<list-loading v-show="isLoading"></list-loading>
 		</section>
 	
 		<tabbar></tabbar>
@@ -18,12 +19,14 @@
 <script>
 import api from '../fetch/api';
 import bookList from '@/components/BookList';
+import listLoading from '@/components/ListLoading';
 import tabbar from '@/components/Tabbar';
 
 export default {
 	name: 'rank',
 	components: {
 		bookList,
+		listLoading,
 		tabbar
 	},
 	data() {
@@ -31,15 +34,19 @@ export default {
 			rankList: [],
 			rankId: '',
 			isDefaultFirst: false,
-			bookList: []
+			bookList: [],
+			isLoading: true
 		};
 	},
 	watch: {
 		'$route': 'fetchData',
 		rankId: function () {
+			this.isLoading = true;
+			this.bookList = [];
 			api.getRankBooks(this.rankId)
 				.then(data => {
-					this.bookList = data.ranking.books;
+					this.bookList = data.ranking.books;					
+					this.isLoading = false;
 				})
 		}
 	},

@@ -2,8 +2,8 @@
     <section class="cat">
         <h3 class="cat-title">{{ category.title }}</h3>
         <ul class="cat-list">
-            <li v-for="cat in category.catList" class="cat-item">
-                <router-link :to="{ name: 'cat', params: {} }">
+            <li v-for="cat in category.catList" class="cat-item" :key="cat.name">
+                <router-link :to="{ name: 'catlist', params: { major: cat.name}, query: { gender: category.gender} }">
                     <p class="cat-name">{{ cat.name }}</p>
                     <p class="cat-count">{{ cat.bookCount }}本</p>
                 </router-link>
@@ -52,7 +52,7 @@ export default {
             border-right: 1px solid #f0f0f0;
             border-bottom: 1px solid #f0f0f0;
         }
-        &:nth-child(3n + 3) {  
+        &:nth-child(3n + 3) {
             border-bottom: 1px solid #f0f0f0;
         }
         &:nth-child(1) {
@@ -61,7 +61,7 @@ export default {
         &:nth-child(2) {
             border-top: 1px solid #f0f0f0;
         }
-        &:nth-child(3) {  
+        &:nth-child(3) {
             border-top: 1px solid #f0f0f0;
         }
         p {

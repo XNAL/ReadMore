@@ -26,7 +26,7 @@ export default {
 			list: [],
 			title: '',
 			page: 1,
-			isLoading: false,
+			isLoading: true,
 			isEnding: false,
 			$body: null,
 			$list: null,
@@ -35,7 +35,7 @@ export default {
 	},
 	created: function() {
 		this.id = this.$route.params.id;
-		this.fetchData();
+		this.fetchData();        
 	},
 	mounted: function() {
 		this.$body = document.body;
@@ -79,6 +79,6 @@ export default {
 
 <style lang="scss">
 .list-section {
-    margin-top: 40px;
+    padding-top: 40px;
 }
 </style>
