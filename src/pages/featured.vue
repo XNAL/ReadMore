@@ -1,20 +1,20 @@
 <template>
-<div class="featured">
-	<headerBar :sex="sex"></headerBar>
-	<div class="featured-book-list">
-		<swiper></swiper>
-		<section class="book-list-section" v-for="module in modules" v-if="module.type === 0" :key="module._id">
-			<div class="book-list-top">
-	            <h2 class="book-list-title">{{ module.title }}</h2>
-	            <div class="book-list-more fr">
-	                <router-link :to="{ name: 'list', params: {id : module._id} }" class="gray">更多</router-link>
-	            </div>
-	        </div>
-			<home-list :book-info="{ id: module._id }" ></home-list>
-		</section>
+	<div class="featured">
+		<headerBar :sex="sex"></headerBar>
+		<div class="featured-book-list">
+			<swiper></swiper>
+			<section class="book-list-section" v-for="module in modules" v-if="module.type === 0" :key="module._id">
+				<div class="book-list-top">
+					<h2 class="book-list-title">{{ module.title }}</h2>
+					<div class="book-list-more fr">
+						<router-link :to="{ name: 'list', params: {id : module._id} }" class="gray">更多</router-link>
+					</div>
+				</div>
+				<home-list :book-info="{ id: module._id }"></home-list>
+			</section>
+		</div>
+		<tabbar></tabbar>
 	</div>
-	<tabbar></tabbar>
-</div>
 </template>
 
 <script>
@@ -41,11 +41,11 @@ export default {
 	watch: {
 		'$route': 'fetchData'
 	},
-	created: function() {
+	created: function () {
 		this.fetchData();
 	},
 	methods: {
-		fetchData: function() {
+		fetchData: function () {
 			let sexType = this.$route.params.sex;
 			// 不为female时，默认值为male
 			sexType = 'female' === sexType.toLowerCase() ? 'female' : 'male';
@@ -73,45 +73,44 @@ export default {
 
 <style scoped lang="scss">
 .featured-book-list {
-    margin-bottom: 60px;
+	margin-bottom: 60px;
 }
 
 .book-list-section {
-    position: relative;
-    //margin-bottom: 10px;
+	position: relative; //margin-bottom: 10px;
 	border-bottom: 10px solid #f6f7f9;
-    padding: 15px 0 0 15px;
-    background: #fff;
+	padding: 15px 0 0 15px;
+	background: #fff;
 }
 
 .book-list-top {
-    position: relative;	
-    margin-bottom: 5px;
-    overflow: hidden;
+	position: relative;
+	margin-bottom: 5px;
+	overflow: hidden;
 
-    .book-list-title {
-        font-weight: 400;
-        display: inline-block;
-        color: #33373d;
-        line-height: 1;
-        border-left: 2px solid #ed424b;
-        padding-left: 8px;
-    }
-    .book-list-more {
-        display: inline-block;
+	.book-list-title {
+		font-weight: 400;
+		display: inline-block;
+		color: #33373d;
+		line-height: 1;
+		border-left: 2px solid #ed424b;
+		padding-left: 8px;
+	}
+	.book-list-more {
+		display: inline-block;
 
-        a {
-            position: absolute;
-            top: 1px;
-            right: 15px;
-            font-size: 14px;
+		a {
+			position: absolute;
+			top: 1px;
+			right: 15px;
+			font-size: 14px;
 
-            &::after {
-                content: '>';
-                display: inline-block;
-                margin-left: 5px;
-            }
-        }
-    }
+			&::after {
+				content: '>';
+				display: inline-block;
+				margin-left: 5px;
+			}
+		}
+	}
 }
 </style>

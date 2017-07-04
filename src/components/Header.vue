@@ -1,8 +1,6 @@
 <template>
 <header class="header">
-	<router-link :to="{ name: '' }" class="header-logo">
-		<h2 class="logo">RM</h2>
-	</router-link>
+	<h2 class="header-logo">RM</h2>
 	<nav class="nav-group">
 		<h3 :class="['nav-item', { active: sex === 'male' }]">
                 <router-link :to="{ name: 'featured', params: { sex: 'male'} }" class="nav-link">男生</router-link>
@@ -41,18 +39,16 @@ export default {
     width: 100%;
     height: 40px;
     position: relative;
-    overflow: hidden;
+    overflow: hidden;     
+    border-bottom: 1px solid #ed424b;  
+    box-sizing: border-box;
 
-    .header-logo {
+    h2.header-logo {
         position: absolute;
-        display: inline-block;
         top: 12px;
         left: 15px;
-
-        h2 {
-            color: #ed424b;
-            line-height: 20px;
-        }
+        color: #ed424b;
+        line-height: 20px;
     }
     .nav-group {
         margin: 10px auto;

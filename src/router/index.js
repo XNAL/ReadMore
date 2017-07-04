@@ -5,22 +5,17 @@ import Category from '@/pages/category';
 import CatList from '@/pages/catlist';
 import Rank from '@/pages/rank';
 import List from '@/pages/list';
+import Shelf from '@/pages/shelf';
 
 Vue.use(Router);
 
 export default new Router({
   mode: 'history',
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'featured',
-    //   component: Featured
-    // },
     {
-      path: '/featured',
-      name: 'defaultFeatured',
-      redirect: '/featured/male',
-      component: Featured
+      path: '/',
+      name: 'shelf',
+      component: Shelf
     },
     {
       path: '/featured/:sex',

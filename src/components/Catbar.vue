@@ -36,7 +36,7 @@
 
 <script>
 import api from '../fetch/api';
-import loadMore from '../util/loadMore';
+import util from '../util/util';
 
 export default {
 	name: 'catbar',
@@ -83,7 +83,7 @@ export default {
 	},
 	mounted() {
 		this.$body = document.body;
-		window.addEventListener('scroll', loadMore.debounce(this.showBrief));
+		window.addEventListener('scroll', util.debounce(this.showBrief));
 	},
 	methods: {
 		showBrief: function() {

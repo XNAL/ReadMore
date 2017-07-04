@@ -9,7 +9,7 @@
 
 <script>
 import api from '../fetch/api';
-import loadMore from '../util/loadMore';
+import util from '../util/util';
 import bookList from '@/components/BookList';
 import backbar from '@/components/Backbar';
 import catbar from '@/components/Catbar';
@@ -49,7 +49,7 @@ export default {
 		this.$body = document.body;
 		this.clientHeight = this.$body.clientHeight;
 		this.$list = this.$refs.catList;
-		window.addEventListener('scroll', loadMore.debounce(this.loadMoreBooks));
+		window.addEventListener('scroll', util.debounce(this.loadMore));
 	},
 	methods: {
 		fetchMinorList: function() {
@@ -68,7 +68,7 @@ export default {
 					this.isLoading = false;
 				})
 		},
-		loadMoreBooks: function() {
+		loadMore: function() {
 			let scrollTop = this.$body.scrollTop;
 			let offsetHeight = this.$list.offsetHeight;
 			if (offsetHeight - scrollTop - this.clientHeight < 160) {

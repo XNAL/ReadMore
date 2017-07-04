@@ -1,14 +1,14 @@
 <template>
     <section class="tabbar">
-        <router-link :to="{ name: 'shelf' }" :class="['tab-item', { active: $route.path.indexOf('shelf') !== -1}]">
+        <router-link :to="{ name: 'shelf' }" class="tab-item" exact>
             <div class="tab-item-icon">
                 <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-shujia"></use>
+                    <use xlink:href="#icon-shelf"></use>
                 </svg>
             </div>
             <p class="tab-item-label">书架</p>
         </router-link>
-        <router-link :to="{ name: 'defaultFeatured' }" :class="['tab-item',{ active: $route.path.indexOf('featured') !== -1}]">
+        <router-link :to="{ name: 'featured', params: { sex: 'male'} }" class="tab-item" exact>
             <div class="tab-item-icon">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-jingxuan"></use>
@@ -16,7 +16,7 @@
             </div>
             <p class="tab-item-label">精选</p>
         </router-link>
-        <router-link :to="{ name: 'category' }" :class="['tab-item', { active: $route.path.indexOf('category') !== -1}]">
+        <router-link :to="{ name: 'category' }" class="tab-item" exact>
             <div class="tab-item-icon">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-fenlei"></use>
@@ -24,7 +24,7 @@
             </div>
             <p class="tab-item-label">分类</p>
         </router-link>
-        <router-link :to="{ name: 'rank' }" :class="['tab-item', { active: $route.path.indexOf('rank') !== -1}]">
+        <router-link :to="{ name: 'rank' }" class="tab-item" exact>
             <div class="tab-item-icon">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-paihang"></use>
@@ -61,7 +61,7 @@ export default {
         flex: 1;
         padding: 10px 0;
 
-        &.active {
+        &.router-link-exact-active {
             color: #ed424b;
         }
     }
