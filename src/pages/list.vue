@@ -1,5 +1,5 @@
 <template>
-<section class="list-section" id="listId">
+<section class="list-section" ref="list">
 	<backbar :title="title"></backbar>
 	<book-list :book-list="list" v-if="list.length > 0"></book-list>
 	<list-loading v-show="isLoading"></list-loading>
@@ -35,12 +35,12 @@ export default {
 	},
 	created: function() {
 		this.id = this.$route.params.id;
-		this.fetchData();        
+		this.fetchData();
 	},
 	mounted: function() {
 		this.$body = document.body;
 		this.clientHeight = this.$body.clientHeight;
-		this.$list = document.getElementById('listId');
+		this.$list = this.$refs.list;
 		window.addEventListener('scroll', loadMore.debounce(this.loadMoreBooks));
 	},
 	methods: {

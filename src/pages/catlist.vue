@@ -1,6 +1,7 @@
 <template>
-<section class="catlist-section" id="catListId">
+<section class="catlist-section" ref="catList">
 	<backbar :title="title"></backbar>
+	<catbar @filter-change="filterBooks" :gender="gender" :major="major"></catbar>
 	<book-list :book-list="list" v-if="list.length > 0"></book-list>
 	<list-loading v-show="isLoading"></list-loading>
 </section>
@@ -11,6 +12,7 @@ import api from '../fetch/api';
 import loadMore from '../util/loadMore';
 import bookList from '@/components/BookList';
 import backbar from '@/components/Backbar';
+import catbar from '@/components/Catbar';
 import listLoading from '@/components/ListLoading';
 
 export default {
@@ -18,6 +20,7 @@ export default {
 	components: {
 		backbar,
 		bookList,
+		catbar,
 		listLoading
 	},
 	data() {
@@ -45,14 +48,14 @@ export default {
 	mounted() {
 		this.$body = document.body;
 		this.clientHeight = this.$body.clientHeight;
-		this.$list = document.getElementById('catListId');
+		this.$list = this.$refs.catList;
 		window.addEventListener('scroll', loadMore.debounce(this.loadMoreBooks));
 	},
 	methods: {
-		fetchCatList: function() {
-			api.getCatList()
+		fetchMinorList: function() {
+			api.getMinorList()
 				.then(data => {
-					
+
 				})
 		},
 		fetchData: function() {
@@ -76,6 +79,18 @@ export default {
 				this.isLoading = true;
 				this.fetchData();
 			}
+		},
+		filterBooks: function(type, minor) {
+			if (this.type === type && this.minor === minor) {
+				return;
+			} else {
+				this.type = type;
+				this.minor = minor;
+				this.list = [];
+				this.page = 0;
+				this.isLoading = true;
+				this.fetchData();
+			}
 		}
 	}
 }
@@ -83,6 +98,6 @@ export default {
 
 <style lang="scss">
 .catlist-section {
-    padding-top: 40px;
+    padding-top: 120px;
 }
 </style>

@@ -11,7 +11,8 @@
                             <span class="book-author fl gray">
                                 <svg class="icon" aria-hidden="true">
                                     <use xlink:href="#icon-author"></use>
-                                </svg>{{ book.author }}
+                                </svg>
+                                {{ book.author }}
                             </span>
                             <span class="book-tags fr">
                                 <em class="small-tag red">{{ parseFloat(book.retentionRatio).toFixed(1) }}%留存</em>

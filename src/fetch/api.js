@@ -22,7 +22,7 @@ export default {
     return async('/cats/lv2/statistics');
   },
 
-  getCatList() {
+  getMinorList() {
     return async('/cats/lv2');
   },
 
