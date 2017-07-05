@@ -1,5 +1,6 @@
 <template>
     <div class="category">
+		<header-bar :title="headerTitle"></header-bar>
         <div class="cat-section">
             <cat v-for="category in categories" :category="category" v-if="category !== null" :key="category.title"></cat>
         </div>
@@ -10,16 +11,19 @@
 <script>
 import api from '../fetch/api';
 import cat from '@/components/Cat';
+import headerBar from '@/components/Header';
 import tabbar from '@/components/Tabbar';
 
 export default {
     name: 'category',
     components: {
         cat,
+        headerBar,
         tabbar
     },
     data() {
         return {
+            headerTitle: '分类',
             categories: []
         }
     },
@@ -64,8 +68,6 @@ export default {
 
 <style lang="scss">
 .cat-section {
-    margin-bottom: 70px;
+    margin: 40px 0 70px;
 }
 </style>
-
-

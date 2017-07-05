@@ -1,6 +1,6 @@
 <template>
 	<div class="featured">
-		<headerBar :sex="sex"></headerBar>
+		<headerBar :title="headerTitle" :sex="sex" :link-name="link"></headerBar>
 		<div class="featured-book-list">
 			<swiper></swiper>
 			<section class="book-list-section" v-for="module in modules" v-if="module.type === 0" :key="module._id">
@@ -34,6 +34,8 @@ export default {
 	},
 	data() {
 		return {
+			headerTitle: 'RM',
+			link: 'featured',
 			sex: '',
 			modules: []
 		};
@@ -73,7 +75,7 @@ export default {
 
 <style scoped lang="scss">
 .featured-book-list {
-	margin-bottom: 60px;
+	margin: 40px 0 60px;
 }
 
 .book-list-section {

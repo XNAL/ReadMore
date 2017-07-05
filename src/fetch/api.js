@@ -52,5 +52,9 @@ export default {
       st: st,
       size: size
     }, 'post');
+  },
+
+  getBook(id) {
+      return async('/book/' + id);
   }
 }

@@ -1,5 +1,6 @@
 <template>
     <section class="shelf">
+        <header-bar :title="headerTitle"></header-bar>
         <empty></empty>
         <tabbar></tabbar>
     </section>
@@ -8,16 +9,19 @@
 <script>
 import empty from '@/components/Empty';
 import tabbar from '@/components/Tabbar';
+import headerBar from '@/components/Header';
 
 export default {
     name: 'shelf',
     components: {
         empty,
-        tabbar
+        tabbar,
+        headerBar
     },
     data() {
         return {
-            bookList: []
+            bookList: [],
+            headerTitle: '我的书架'
         }
     }
 }
@@ -26,4 +30,3 @@ export default {
 <style lang="scss">
 
 </style>
-

@@ -6,6 +6,7 @@ import CatList from '@/pages/catlist';
 import Rank from '@/pages/rank';
 import List from '@/pages/list';
 import Shelf from '@/pages/shelf';
+import Book from '@/pages/book';
 
 Vue.use(Router);
 
@@ -46,6 +47,11 @@ export default new Router({
       path: '/list/:id',
       name: 'list',
       component: List
+    },
+    {
+      path: '/book/:id',
+      name: 'book',
+      component: Book
     }
   ]
   // scrollBehavior(to, from, savedPosition) {

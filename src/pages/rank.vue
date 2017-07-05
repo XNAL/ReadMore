@@ -1,5 +1,6 @@
 <template>
 	<div class="rank">
+		<header-bar :title="headerTitle"></header-bar>
 		<section class="rank-bar-section">
 			<ul class="rank-list">
 				<li v-for="rank in rankList" class="rank-item fl" :key="rank._id">
@@ -11,7 +12,7 @@
 			<book-list :book-list="bookList" v-if="bookList.length > 0"></book-list>
 			<list-loading v-show="isLoading"></list-loading>
 		</section>
-	
+
 		<tabbar></tabbar>
 	</div>
 </template>
@@ -20,6 +21,7 @@
 import api from '../fetch/api';
 import bookList from '@/components/BookList';
 import listLoading from '@/components/ListLoading';
+import headerBar from '@/components/Header';
 import tabbar from '@/components/Tabbar';
 
 export default {
@@ -27,10 +29,12 @@ export default {
 	components: {
 		bookList,
 		listLoading,
+		headerBar,
 		tabbar
 	},
 	data() {
 		return {
+			headerTitle: '排行榜',
 			rankList: [],
 			rankId: '',
 			isDefaultFirst: false,
@@ -45,7 +49,7 @@ export default {
 			this.bookList = [];
 			api.getRankBooks(this.rankId)
 				.then(data => {
-					this.bookList = data.ranking.books;					
+					this.bookList = data.ranking.books;
 					this.isLoading = false;
 				})
 		}
@@ -79,7 +83,7 @@ export default {
 	.rank-bar-section {
 		width: 80px;
 		position: fixed;
-		top: 0;
+		top: 40px;
 		left: 0;
 		bottom: 60px;
 		background-color: #f6f7f9;
@@ -112,7 +116,7 @@ export default {
 
 	.book-list-section {
 		position: relative;
-		margin: 0 0 60px 80px;
+		margin: 40px 0 60px 80px;
 		background-color: #fff;
 	}
 }

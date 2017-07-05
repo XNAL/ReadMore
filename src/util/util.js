@@ -1,3 +1,5 @@
+const staticPath = 'http://statics.zhuishushenqi.com';
+
 export default {
 	debounce: (fn, delay, timeout) => {
 		var timer = null;
