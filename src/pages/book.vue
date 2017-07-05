@@ -1,20 +1,27 @@
 <template>
 	<div class="book">
+		<backbar :title="title"></backbar>
 		<book-info :book-id="bookId"></book-info>
+		<bookbar></bookbar>
 	</div>
 </template>
 
 <script>
+import backbar from '@/components/Backbar';
 import bookInfo from '@/components/BookInfo';
+import bookbar from '@/components/Bookbar';
 
 export default {
 	name: 'book',
 	components: {
-		bookInfo
+		backbar,
+		bookInfo,
+		bookbar
 	},
 	data() {
 		return {
-			bookId: ''
+			bookId: '',
+			title: '书籍详情'
 		}
 	},
 	created() {
@@ -28,5 +35,6 @@ export default {
 	position: relative;
 	height: 100%;
 	overflow: hidden;
+	margin-top: 40px;
 }
 </style>

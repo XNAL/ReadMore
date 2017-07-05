@@ -3,7 +3,7 @@
         <router-link :to="{ name: 'featured', params: { sex: 'male' } }">    
             <div class="empty-icon">
                 <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-empty"></use>
+                    <use xlink:href="#icon-add_shelf"></use>
                 </svg>
             </div>
             <p class="empty-notice">快去添加你喜欢的小说吧</p>

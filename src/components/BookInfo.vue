@@ -14,7 +14,7 @@
 	<div class="book-reader">
 		<p class="reader-item"><span class="title">追人气</span><span class="content">{{ book.latelyFollower }}</span></p>
 		<p class="reader-item"><span class="title">读者留存率</span><span class="content">{{ book.retentionRatio }}%</span></p>
-		<p class="reader-item"><span class="title">日更新字数/天</span><span class="content">{{ book.serializeWordCount }}</span></p>
+		<p class="reader-item"><span class="title">日更新字数/天</span><span class="content">{{ serializeWordCount }}</span></p>
 	</div>
 	<div class="book-intro" @click="spreadIntro" :class="{ part: isPart }">
 		<p class="long-intro">{{ book.longIntro }}</p>
@@ -59,14 +59,15 @@ export default {
 		}
 	},
 	computed: {
+		cover() {
+			return util.staticPath + this.book.cover;
+		},
 		wordCount() {
 			return this.book.wordCount > 10000 ? parseInt(this.book.wordCount / 10000) + '万' : this.book.wordCount;
 		},
-		cover() {
-			// return util.staticPath + this.book.cover;
-			return this.book.cover.indexOf('http://statics.zhuishushenqi.com') !== -1 ? this.book.cover: 'http://statics.zhuishushenqi.com' + this.book.cover
-			// return util.staticPath + this.book.cover
-		}
+        serializeWordCount() {
+            return this.book.serializeWordCount < 0 ? 0 : this.book.serializeWordCount;
+        }
 	},
 	created() {
 		api.getBook(this.bookId)
@@ -162,7 +163,7 @@ export default {
         transform: rotate(270deg);
         z-index: 99;
         color: #999;
-        background: rgba(255, 255, 255, .5);
+        background: rgba(255, 255, 255, .8);
     }
 
     &.part {
