@@ -45,9 +45,6 @@ import {staticPath} from '../util/util';
 
 export default {
 	name: 'bookInfo',
-	// props: {
-	// 	bookId: String
-	// },
 	data() {
 		return {
 			book: null,
@@ -117,6 +114,7 @@ export default {
             color: #333;
             line-height: 1;
             margin: 3px 0 5px;
+            font-weight: 500;
         }
         .book-meta {
             font-size: 13px;
@@ -192,7 +190,7 @@ export default {
     .menu-title {
         font-size: 16px;
         line-height: 36px;
-        font-weight: 600;
+        font-weight: 400;
     }
     .menu-content {
         position: relative;

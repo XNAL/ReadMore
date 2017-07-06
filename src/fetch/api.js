@@ -55,6 +55,17 @@ export default {
   },
 
   getBook(id) {
-      return async('/book/' + id);
+    return async('/book/' + id);
+  },
+
+  getReview(id, limit = 5) {
+    return async('/post/review/best-by-book', {
+      book: id,
+      limit: limit
+    });
+  },
+
+  getRecommend(id) {
+    return async('/book/' + id + '/recommend');
   }
 }

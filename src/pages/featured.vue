@@ -7,7 +7,7 @@
 				<div class="book-list-top">
 					<h2 class="book-list-title">{{ module.title }}</h2>
 					<div class="book-list-more fr">
-						<router-link :to="{ name: 'list', params: {id : module._id} }" class="gray">更多</router-link>
+						<router-link :to="{ name: 'list', params: {id : module._id} }" class="red">更多</router-link>
 					</div>
 				</div>
 				<home-list :book-info="{ id: module._id }"></home-list>
@@ -103,14 +103,14 @@ export default {
 
 		a {
 			position: absolute;
-			top: 1px;
+			top: 2px;
 			right: 15px;
-			font-size: 14px;
+			font-size: 13px;
 
 			&::after {
 				content: '>';
 				display: inline-block;
-				margin-left: 5px;
+				margin-left: 3px;
 			}
 		}
 	}

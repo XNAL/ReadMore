@@ -1,7 +1,7 @@
 <template>
 	<section class="rank-bar">
 		<ul class="rank-list">
-			<li class="rank-item fl" v-for="rank in rankList">
+			<li class="rank-item fl" v-for="rank in rankList" :key="rank._id">
 				<router-link :to="{ name: 'rank', params: { id: rank._id } }">{{ rank.shortTitle }}</router-link>
 			</li>
 		</ul>
