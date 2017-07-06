@@ -8,7 +8,7 @@
 
 <script>
 import api from '../fetch/api';
-import util from '../util/util';
+import {debounce} from '../util/util';
 import bookList from '@/components/BookList';
 import backbar from '@/components/Backbar';
 import listLoading from '@/components/ListLoading';
@@ -41,7 +41,7 @@ export default {
 		this.$body = document.body;
 		this.clientHeight = this.$body.clientHeight;
 		this.$list = this.$refs.list;
-		window.addEventListener('scroll', util.debounce(this.loadMore));
+		window.addEventListener('scroll', debounce(this.loadMore));
 	},
 	methods: {
 		fetchData: function() {

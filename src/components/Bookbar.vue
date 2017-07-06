@@ -1,35 +1,58 @@
 <template>
-    <section class="book-bar">
-        <div class="book-bar-item" v-show="!isAdded">
-            <div class="book-bar-icon">
-                <svg class="icon" aria-hidden="true">
+<section class="book-bar">
+	<div class="book-bar-item" v-show="!isAdded" @click="addToShelf">
+		<div class="book-bar-icon">
+			<svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-add_shelf"></use>
                 </svg>
-            </div>
-            <p class="book-bar-content">加入书架</p>
-        </div>
-        <div class="book-bar-item" v-show="isAdded">
-            <div class="book-bar-icon">
-                <svg class="icon" aria-hidden="true">
+		</div>
+		<p class="book-bar-content">加入书架</p>
+	</div>
+	<div class="book-bar-item" v-show="isAdded">
+		<div class="book-bar-icon">
+			<svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-shelf_added"></use>
                 </svg>
-            </div>
-            <p class="book-bar-content">已加入书架</p>
-        </div>
-        <div class="book-bar-item read">
-            <p class="book-bar-content">立即阅读</p>
-        </div>
-    </section>
+		</div>
+		<p class="book-bar-content">已加入书架</p>
+	</div>
+	<div class="book-bar-item read">
+		<p class="book-bar-content">立即阅读</p>
+	</div>
+</section>
 </template>
 
 <script>
+import {
+	mapState,
+	mapMutations
+} from 'vuex';
+
 export default {
-    name: 'bookbar',
-    data() {
-        return {
-            isAdded: true
-        }
-    }
+	name: 'bookbar',
+	data() {
+		return {
+			isAdded: false
+		}
+	},
+	computed: {
+		...mapState([
+			'curBookId',
+			'shelfBookList'
+		])
+	},
+	created() {
+		this.isAdded = this.shelfBookList.includes(this.curBookId);
+	},
+	methods: {
+		...mapMutations([
+			'ADD_TO_SHELF'
+		]),
+		addToShelf: function() {
+			this.ADD_TO_SHELF(this.curBookId);
+			this.isAdded = true;
+		}
+	}
 }
 </script>
 
@@ -76,5 +99,3 @@ export default {
     }
 }
 </style>
-
-

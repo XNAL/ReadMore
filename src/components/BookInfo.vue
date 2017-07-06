@@ -38,15 +38,16 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
 import api from '../fetch/api';
 import moment from 'moment';
-import util from '../util/util';
+import {staticPath} from '../util/util';
 
 export default {
 	name: 'bookInfo',
-	props: {
-		bookId: String
-	},
+	// props: {
+	// 	bookId: String
+	// },
 	data() {
 		return {
 			book: null,
@@ -59,8 +60,11 @@ export default {
 		}
 	},
 	computed: {
+		...mapState([
+			'curBookId'
+		]),
 		cover() {
-			return util.staticPath + this.book.cover;
+			return staticPath + this.book.cover;
 		},
 		wordCount() {
 			return this.book.wordCount > 10000 ? parseInt(this.book.wordCount / 10000) + '万' : this.book.wordCount;
@@ -70,7 +74,7 @@ export default {
         }
 	},
 	created() {
-		api.getBook(this.bookId)
+		api.getBook(this.curBookId)
 			.then(data => this.book = data);
 	},
 	methods: {
