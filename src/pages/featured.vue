@@ -1,6 +1,6 @@
 <template>
 	<div class="featured">
-		<headerBar :title="headerTitle" :sex="sex" :link-name="link"></headerBar>
+		<header-bar :sex="sex" v-on:change-sex="changeSex"></header-bar>
 		<div class="featured-book-list">
 			<swiper></swiper>
 			<section class="book-list-section" v-for="module in modules" v-if="module.type === 0" :key="module._id">
@@ -18,11 +18,13 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 import api from '../fetch/api';
 import homeList from '@/components/HomeList';
 import swiper from '@/components/Swiper';
 import tabbar from '@/components/Tabbar';
 import headerBar from '@/components/Header';
+import { FEATURED_PAGE } from '../util/util';
 
 export default {
 	name: 'featured',
@@ -34,24 +36,22 @@ export default {
 	},
 	data() {
 		return {
-			headerTitle: 'RM',
-			link: 'featured',
-			sex: '',
+			sex: 'male',		// 默认为男生
 			modules: []
 		};
 	},
-	watch: {
-		'$route': 'fetchData'
-	},
 	created: function () {
+		this.SET_HEADER_INFO({
+			title: 'RM',
+			type: FEATURED_PAGE
+		});
 		this.fetchData();
 	},
 	methods: {
+		...mapMutations([
+			'SET_HEADER_INFO'
+		]),
 		fetchData: function () {
-			let sexType = this.$route.params.sex;
-			// 不为female时，默认值为male
-			sexType = 'female' === sexType.toLowerCase() ? 'female' : 'male';
-			this.sex = sexType;
 			api.getFeaturedData()
 				.then(data => {
 					/*
@@ -61,12 +61,16 @@ export default {
 					data = Array.from(data).sort((a, b) => {
 						return a.order - b.order;
 					});
-					let sexOrder = sexType === 'male' ? [2, 5, 7, 9] : [1, 4, 6, 8];
+					let sexOrder = this.sex === 'male' ? [2, 5, 7, 9] : [1, 4, 6, 8];
 					data = data.filter((obj) => {
 						return sexOrder.includes(obj.order);
 					});
 					this.modules = data;
 				});
+		},
+		changeSex: function(sex) {
+			this.sex = sex;
+			this.fetchData();
 		}
 	}
 

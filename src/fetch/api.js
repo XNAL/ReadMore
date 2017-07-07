@@ -1,71 +1,72 @@
 import async from './fetch';
 
 export default {
-  getFeaturedData() {
-    return async('/recommendPage/nodes/5910018c8094b1e228e5868f')
-      .then(data => data.data);
-  },
+	getFeaturedData() {
+		return async('/recommendPage/nodes/5910018c8094b1e228e5868f')
+			.then(data => data.data);
+	},
 
-  getBooks(id) {
-    return async('/recommendPage/books/' + id)
-      .then(data => data.data);
-  },
+	getBooks(id) {
+		return async('/recommendPage/books/' + id)
+			.then(data => data.data);
+	},
 
-  getSwiperPictures() {
-    return async('/recommendPage/node/spread/575f74f27a4a60dc78a435a3', {
-        pl: 'ios'
-      })
-      .then(data => data.data);
-  },
+	getSwiperPictures() {
+		return async('/recommendPage/node/spread/575f74f27a4a60dc78a435a3', {
+				pl: 'ios'
+			})
+			.then(data => data.data);
+	},
 
-  getCategory() {
-    return async('/cats/lv2/statistics');
-  },
+	getCategory() {
+		return async('/cats/lv2/statistics');
+	},
 
-  getMinorList() {
-    return async('/cats/lv2');
-  },
+	getMinorList() {
+		return async('/cats/lv2');
+	},
 
-  getCatBooks(gender, type = 'hot', major = '', minor = '', start = 0, limit = 20) {
-    return async('/book/by-categories', {
-        gender: gender,
-        type: type,
-        major: major,
-        minor: minor,
-        start: start,
-        limit: limit
-      })
-      .then(data => data.books);
-  },
+	getCatBooks(gender, type = 'hot', major = '', minor = '', start = 0, limit = 20) {
+		return async('/book/by-categories', {
+				gender: gender,
+				type: type,
+				major: major,
+				minor: minor,
+				start: start,
+				limit: limit
+			})
+			.then(data => data.books);
+	},
 
-  getRanks() {
-    return async('/ranking/gender');
-  },
+	getRanks() {
+		return async('/ranking/gender');
+	},
 
-  getRankBooks(id) {
-    return async('/ranking/' + id);
-  },
+	getRankBooks(id) {
+		return async('/ranking/' + id);
+	},
 
-  getBookList(id, st = 1, size = 10) {
-    return async('/recommendPage/node/books/all/' + id, {
-      ajax: 'ajax',
-      st: st,
-      size: size
-    }, 'post');
-  },
+	getBookList(id, st = 1, size = 10) {
+		return async('/recommendPage/node/books/all/' + id, {
+			ajax: 'ajax',
+			st: st,
+			size: size
+		}, 'post');
+	},
 
-  getBook(id) {
-    return async('/book/' + id);
-  },
+	getBook(id) {
+		return async('/book/' + id);
+	},
 
-  getReview(id, limit = 5) {
-    return async('/post/review/best-by-book', {
-      book: id,
-      limit: limit
-    });
-  },
+	getReview(id, limit = 5) {
+		return async('/post/review/best-by-book', {
+			book: id,
+			limit: limit
+		}).then(data => data.reviews);
+	},
 
-  getRecommend(id) {
-    return async('/book/' + id + '/recommend');
-  }
+	getRecommend(id) {
+		return async('/book/' + id + '/recommend')
+			.then(data => data.books);
+	}
 }

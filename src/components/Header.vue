@@ -1,13 +1,9 @@
 <template>
 <header class="header">
-	<h2 class="header-logo">{{ title }}</h2>
+	<h2 class="header-logo">{{ headerTitle }}</h2>
 	<nav class="nav-group" v-if="isShow">
-		<h3 :class="['nav-item', { active: sex === 'male' }]">
-                <router-link :to="{ name: linkName, params: { sex: 'male'} }" class="nav-link">男生</router-link>
-            </h3>
-		<h3 :class="['nav-item', { active: sex === 'female' }]">
-                <router-link :to="{ name: linkName, params: { sex: 'female'}  }" class="nav-link">女生</router-link>
-            </h3>
+		<h3 :class="['nav-item', { active: sexType === 'male' }]" @click="changSex('male')">男生</h3>
+		<h3 :class="['nav-item', { active: sexType === 'female' }]" @click="changSex('female')">女生</h3>
 	</nav>
 	<div class="header-search">
 		<router-link :to="{ name: 'search' }">
@@ -20,32 +16,39 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import { FEATURED_PAGE, RANK_PAGE } from '../util/util';
+
 export default {
 	name: 'header',
 	props: {
-		title: {
-			type: String,
-			required: true,
-			default: 'RM'
-		},
 		sex: {
-			type: String,
-			default: ''
-		},
-		linkName: {
 			type: String,
 			default: ''
 		}
 	},
+	computed: {
+		...mapState([
+			'headerTitle',
+			'headerType'
+		])
+	},
 	data() {
 		return {
-			isShow: false
+			isShow: false,
+			sexType: ''
 		};
 	},
-	created: function() {
-		console.log(this.linkName)
-		if (this.linkName !== '') {
+	created() {
+		if (this.headerType === FEATURED_PAGE || this.headerType === RANK_PAGE) {
 			this.isShow = true;
+		}
+		this.sexType = this.sex;
+	},
+	methods: {
+		changSex: function (sex) {
+			this.sexType = sex;
+			this.$emit('change-sex', sex);
 		}
 	}
 }

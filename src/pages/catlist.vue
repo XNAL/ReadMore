@@ -52,12 +52,6 @@ export default {
 		window.addEventListener('scroll', debounce(this.loadMore));
 	},
 	methods: {
-		fetchMinorList: function() {
-			api.getMinorList()
-				.then(data => {
-
-				})
-		},
 		fetchData: function() {
 			api.getCatBooks(this.gender, this.type, this.major, this.minor, this.page * this.limit)
 				.then(data => {

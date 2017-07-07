@@ -1,3 +1,11 @@
+//页面类型
+export const FEATURED_PAGE = 'FEATURED';
+export const SHELF_PAGE = 'SHELF';
+export const RANK_PAGE = 'RANK';
+export const CATEGORY_PAGE = 'CATEGORY';
+
+
+// 图片根路径
 export const staticPath = 'http://statics.zhuishushenqi.com';
 
 // 存储localStorage时设置前缀

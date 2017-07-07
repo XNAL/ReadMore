@@ -48,14 +48,14 @@ export default {
 	},
     computed: {
         ...mapState([
-            'curBookId'
+            'curBook'
         ])
     },
     created() {
         this.staticPath = staticPath;
-        api.getReview(this.curBookId)
+        api.getReview(this.curBook.id)
             .then(data => {
-                this.reviewList = data.reviews;
+                this.reviewList = data;
             })
     }
 }
@@ -127,5 +127,3 @@ export default {
     }
 }
 </style>
-
-

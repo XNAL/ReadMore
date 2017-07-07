@@ -33,13 +33,13 @@ export default {
     },
     computed: {
         ...mapState([
-            'curBookId'
+            'curBook'
         ])
     },
     created() {
-        api.getRecommend(this.curBookId)
+        api.getRecommend(this.curBook.id)
             .then(data => {
-                this.recommendList = data.books;
+                this.recommendList = data;
             })
     }
 }
@@ -87,5 +87,3 @@ export default {
     }
 }
 </style>
-
-

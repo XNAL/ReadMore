@@ -4,7 +4,7 @@ import {
 	DEL_FROM_SHELF,
 	DEL_ALL_SHELF,
 	SET_HEADER_INFO,
-	SET_CUR_BOOKID
+	SET_CUR_BOOK
 } from './mutation-types';
 
 import {
@@ -29,16 +29,23 @@ export default {
 		state.headerType = type;
 	},
 
-	[ADD_TO_SHELF](state, bookId) {
-		if (!state.shelfBookList.includes(bookId)) {
-			state.shelfBookList.push(bookId);
+	[ADD_TO_SHELF](state, book) {
+		let isExist = false;
+		for(let shelfBook of Object.values(state.shelfBookList)) {
+			if (shelfBook.id === book.id) {
+				isExist = true;
+				break;
+			}
+		}
+		if (!isExist) {
+			state.shelfBookList.push(book);
 			setStore('SHEFLBOOK', state.shelfBookList);
 		}
 	},
 
 	[DEL_FROM_SHELF](state, bookIds) {
 		state.shelfBookList = state.shelfBookList.filter(value => {
-			return !bookIds.includes(value);
+			return !bookIds.includes(value.id);
 		});
 		setStore('SHEFLBOOK', state.shelfBookList);
 	},
@@ -48,8 +55,8 @@ export default {
 		removeStore('SHEFLBOOK');
 	},
 
-	[SET_CUR_BOOKID](state, bookId) {
-		state.curBookId = bookId;
+	[SET_CUR_BOOK](state, book) {
+		state.curBook = book;
 	}
 
 }

@@ -37,19 +37,25 @@ export default {
 	},
 	computed: {
 		...mapState([
-			'curBookId',
+			'curBook',
 			'shelfBookList'
 		])
 	},
 	created() {
-		this.isAdded = this.shelfBookList.includes(this.curBookId);
+		// this.isAdded = this.shelfBookList.includes(this.curBookId);
+		for(let book of Object.values(this.shelfBookList)) {
+			if (book.id === this.curBook.id) {
+				this.isAdded = true;
+				break;
+			}
+		}
 	},
 	methods: {
 		...mapMutations([
 			'ADD_TO_SHELF'
 		]),
 		addToShelf: function() {
-			this.ADD_TO_SHELF(this.curBookId);
+			this.ADD_TO_SHELF(this.curBook);
 			this.isAdded = true;
 		}
 	}

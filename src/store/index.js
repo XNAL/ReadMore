@@ -7,10 +7,10 @@ import actions from './action';
 Vue.use(Vuex);
 
 const state = {
-	curBookId: '',		//当前查看的书籍Id
+	curBook: '',		//当前查看的书籍对象
 	headerTitle: 'RM',	//头部标题
 	headerType: '',		//头部类型：featured:精选、rank:排行榜
-	shelfBookList: []	//书架书籍
+	shelfBookList: []	//书架书籍对象数组
 }
 
 export default new Vuex.Store({

@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import {mapState, mapMutations} from 'vuex';
 import api from '../fetch/api';
 import moment from 'moment';
 import {staticPath} from '../util/util';
@@ -58,7 +58,7 @@ export default {
 	},
 	computed: {
 		...mapState([
-			'curBookId'
+			'curBook'
 		]),
 		cover() {
 			return staticPath + this.book.cover;
@@ -71,10 +71,23 @@ export default {
         }
 	},
 	created() {
-		api.getBook(this.curBookId)
-			.then(data => this.book = data);
+		api.getBook(this.curBook.id)
+			.then(data => {
+				this.book = data;
+				this.SET_CUR_BOOK({
+					id: this.curBook.id,
+					title: data.title,
+					cover: staticPath + data.cover,
+					author: data.author,
+					lastChapter: data.lastChapter,
+					updated: data.updated
+				})
+			});
 	},
 	methods: {
+		...mapMutations([
+			'SET_CUR_BOOK'
+		]),
 		spreadIntro: function(e) {
 			this.isPart = !this.isPart;
 		}

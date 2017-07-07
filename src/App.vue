@@ -5,8 +5,18 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+
 export default {
-  name: 'app'
+  name: 'app',
+  created() {
+      this.INIT_SHELF();
+  },
+  methods: {
+      ...mapMutations([
+          'INIT_SHELF'
+      ])
+  }
 }
 </script>
 

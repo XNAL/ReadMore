@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex';
+import { CATEGORY_PAGE } from '../util/util';
 import api from '../fetch/api';
 import cat from '@/components/Cat';
 import headerBar from '@/components/Header';
@@ -28,40 +30,52 @@ export default {
         }
     },
     created: function () {
-        api.getCategory()
-            .then(data => {
-                for (let [key, value] of Object.entries(data)) {
-                    let obj = null;
-                    switch (key) {
-                        case 'male':
-                            obj = {
-                                title: '男生',
-                                gender: 'male',
-                                catList: value
-                            };
-                            break;
-                        case 'female':
-                            obj = {
-                                title: '女生',
-                                gender: 'female',
-                                catList: value
-                            };
-                            break;
-                        case 'press':
-                            obj = {
-                                title: '出版',
-                                gender: 'press',
-                                catList: value
-                            };
-                            break;
-                        default:
-                            break;
+		this.SET_HEADER_INFO({
+			title: '分类',
+			type: CATEGORY_PAGE
+		});
+        this.fetchData();
+    },
+    methods: {
+		...mapMutations([
+			'SET_HEADER_INFO'
+		]),
+        fetchData: function() {
+            api.getCategory()
+                .then(data => {
+                    for (let [key, value] of Object.entries(data)) {
+                        let obj = null;
+                        switch (key) {
+                            case 'male':
+                                obj = {
+                                    title: '男生',
+                                    gender: 'male',
+                                    catList: value
+                                };
+                                break;
+                            case 'female':
+                                obj = {
+                                    title: '女生',
+                                    gender: 'female',
+                                    catList: value
+                                };
+                                break;
+                            case 'press':
+                                obj = {
+                                    title: '出版',
+                                    gender: 'press',
+                                    catList: value
+                                };
+                                break;
+                            default:
+                                break;
+                        }
+                        if (obj !== null) {
+                            this.categories.push(obj);
+                        }
                     }
-                    if (obj !== null) {
-                        this.categories.push(obj);
-                    }
-                }
-            })
+                })
+        }
     }
 }
 </script>

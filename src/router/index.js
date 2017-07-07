@@ -19,7 +19,7 @@ export default new Router({
       component: Shelf
     },
     {
-      path: '/featured/:sex',
+      path: '/featured',
       name: 'featured',
       component: Featured
     },
@@ -36,11 +36,6 @@ export default new Router({
     {
       path: '/rank',
       name: 'rank',
-      component: Rank
-    },
-    {
-      path: '/rank/:id',
-      name: 'ranklist',
       component: Rank
     },
     {
