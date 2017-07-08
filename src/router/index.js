@@ -7,6 +7,7 @@ import Rank from '@/pages/rank';
 import List from '@/pages/list';
 import Shelf from '@/pages/shelf';
 import Book from '@/pages/book';
+import Read from '@/pages/read';
 
 Vue.use(Router);
 
@@ -47,6 +48,11 @@ export default new Router({
       path: '/book/:id',
       name: 'book',
       component: Book
+    },
+    {
+      path: '/read/:id',
+      name: 'read',
+      component: Read
     }
   ]
   // scrollBehavior(to, from, savedPosition) {

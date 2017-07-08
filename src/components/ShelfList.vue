@@ -2,19 +2,21 @@
 	<section class="shelf-list">
 		<ul class="shelf-book-list" v-if="shelfBookList.length > 0">
 			<li v-for="book in shelfBookList" :key="book.id" class="shelf-book-item">
-				<img :src="book.cover" alt="book.title" class="cover fl">
-				<div class="book-info">
-					<h4 class="title">
-						{{ book.title }}
-						<span class="time red">{{ book.updated | time}}</span>
-					</h4>
-					<p class="meta">
-						{{ book.author }}&nbsp;&nbsp;著
-					</p>
-					<p class="meta">
-						连载至：&nbsp;&nbsp;{{ book.lastChapter }}
-					</p>
-				</div>
+				<router-link :to="{ name: 'read', params: { id: book.id }}">
+					<img :src="book.cover" alt="book.title" class="cover fl">
+					<div class="book-info">
+						<h4 class="title">
+							{{ book.title }}
+							<span class="time red">{{ book.updated | time}}</span>
+						</h4>
+						<p class="meta author">
+							{{ book.author }}&nbsp;&nbsp;著
+						</p>
+						<p class="meta">
+							连载至：&nbsp;&nbsp;{{ book.lastChapter }}
+						</p>
+					</div>
+				</router-link>
 			</li>
 		</ul>
 	</section>
@@ -86,10 +88,14 @@ export default {
 			}
         }
         .meta {
-            line-height: 2;
+            line-height: 1;
 			white-space: nowrap;
 			text-overflow: ellipsis;
 			overflow: hidden;
+
+			&.author {
+				margin: 9px 0;
+			}
         }
     }
 }

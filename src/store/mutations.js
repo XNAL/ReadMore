@@ -4,7 +4,8 @@ import {
 	DEL_FROM_SHELF,
 	DEL_ALL_SHELF,
 	SET_HEADER_INFO,
-	SET_CUR_BOOK
+	SET_CUR_BOOK,
+	SET_NIGHT_MODE
 } from './mutation-types';
 
 import {
@@ -57,6 +58,10 @@ export default {
 
 	[SET_CUR_BOOK](state, book) {
 		state.curBook = book;
-	}
+	},
 
+	[SET_NIGHT_MODE](state, isNight) {
+		state.nightMode = isNight;
+		setStore('NIGHTMODE', state.nightMode);
+	}
 }

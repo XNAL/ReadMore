@@ -40,7 +40,9 @@ export default {
 			cover: '',
 			author: '',
 			lastChapter: '',
-			updated: ''
+			updated: '',
+			readChapter: '',
+			sort: true
 		});
 	},
 	methods: {

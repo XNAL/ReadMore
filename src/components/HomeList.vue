@@ -15,7 +15,7 @@
                         </span>
 						<span class="book-tags fr">
                             <em class="small-tag gray">{{ book.majorCate }}</em>
-                            <em class="small-tag red">{{ book.isSerial ? '完结' : '连载中' }}</em>
+                            <em class="small-tag red">{{ book.isSerial ? '连载中' : '完结' }}</em>
                             <em class="small-tag blue">{{ book.latelyFollower }}人气</em>
                         </span>
 					</p>

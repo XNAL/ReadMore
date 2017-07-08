@@ -10,7 +10,8 @@ const state = {
 	curBook: '',		//当前查看的书籍对象
 	headerTitle: 'RM',	//头部标题
 	headerType: '',		//头部类型：featured:精选、rank:排行榜
-	shelfBookList: []	//书架书籍对象数组
+	shelfBookList: [],	//书架书籍对象数组
+	nightMode: false	//是否夜间模式
 }
 
 export default new Vuex.Store({

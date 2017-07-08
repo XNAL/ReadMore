@@ -2,7 +2,7 @@ import axios from 'axios';
 import qs from 'qs';
 
 // axios.defaults.baseURL = 'http://api.zhuishushenqi.com';
-axios.defaults.baseURL = '/api';
+// axios.defaults.baseURL = '/api';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.timeout = 20000;
 
