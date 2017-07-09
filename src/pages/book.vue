@@ -57,7 +57,7 @@ export default {
 <style lang="scss">
 .book {
     position: relative;
-    height: 100%;
+    // height: 100%;
     overflow: hidden;
     margin: 40px 0 70px;
 }

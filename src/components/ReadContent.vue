@@ -1,5 +1,5 @@
 <template>
-    <section :class="['read-content', skinClass, { night: nightMode }]" ref="content">
+    <section :class="['read-content', skinColor, { night: nightMode }]" ref="content">
         <div class="read-action-mid" @click="showOpt"></div>
         <div :class="['read-content-header', { 'read-opt': isShowOpt }]">
             <span class="back" @click="$router.go(-1)">
@@ -9,15 +9,16 @@
             </span>
         </div>
         <div class="read-content-content">
-            <h4>{{ readContent.title }}</h4>
+            <h4 :class="skinColor">{{ readContent.title }}</h4>
             <div class="content-list" v-if="readContent.contentList.length > 0">
+                <!--<h3>{{ readContent.title }}</h3>-->
                 <p v-for="content in readContent.contentList">{{ content }}</p>
             </div>
         </div>
         <div :class="['read-content-set', { 'read-opt': isShowSet }]">
             <ul class="read-set-bg-list">
-                <li v-for="skin in skinBgList" class="read-set-bg-item" @click="changeBkColor(skin)">
-                    <span :class="[skin, { active: skin === skinClass }]"></span>
+                <li v-for="skin in skinBgList" class="read-set-bg-item" @click="changeBkColor(skin)" :key="skin">
+                    <span :class="[skin, { active: skin === skinColor }]"></span>
                 </li>
             </ul>
             <div class="read-set-switch">
@@ -80,7 +81,8 @@ export default {
     },
     computed: {
         ...mapState([
-            'nightMode'
+            'nightMode',
+            'skinColor'
         ])
     },
     data() {
@@ -88,18 +90,21 @@ export default {
             isShowOpt: false,
             isShowSet: false,
             isSwipeLR: false,
-            skinClass: 'skin-default',
             skinBgList: ['skin-default', 'skin-blue', 'skin-green', 'skin-pink', 'skin-dark', 'skin-light']
         }
     },
     created() {
-
+        if(!this.skinBgList.includes(this.skinColor)) {
+            this.SET_SKIN_COLOR('skin-default');
+        }
     },
     methods: {
         ...mapMutations([
-            'SET_NIGHT_MODE'
+            'SET_NIGHT_MODE',
+            'SET_SKIN_COLOR'
         ]),
         showMenu: function () {
+            this.isShowOpt = false;
             this.$emit('show-menu');
         },
         switchMode: function () {
@@ -121,7 +126,7 @@ export default {
         },
         changeBkColor(skin) {
             this.SET_NIGHT_MODE(false);
-            this.skinClass = skin;
+            this.SET_SKIN_COLOR(skin);
         }
     }
 }
@@ -161,15 +166,21 @@ export default {
     .read-content-content {
         position: relative;
         overflow: hidden;
-        padding: 10px 15px;
+        padding: 30px 15px 20px;
         font-size: 14px;
         h4 {
             font-size: 12px;
             color: #666;
             font-weight: 400;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            right: 0;
+            line-height: 30px;
+            padding-left: 15px;
+            z-index: 9;
         }
         .content-list {
-            padding: 10px 0;
             p {
                 text-indent: 2em;
                 margin: 0.5em 0;

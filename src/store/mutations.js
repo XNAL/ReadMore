@@ -5,7 +5,8 @@ import {
 	DEL_ALL_SHELF,
 	SET_HEADER_INFO,
 	SET_CUR_BOOK,
-	SET_NIGHT_MODE
+	SET_NIGHT_MODE,
+	SET_SKIN_COLOR
 } from './mutation-types';
 
 import {
@@ -63,5 +64,10 @@ export default {
 	[SET_NIGHT_MODE](state, isNight) {
 		state.nightMode = isNight;
 		setStore('NIGHTMODE', state.nightMode);
+	},
+
+	[SET_SKIN_COLOR](state, skinColor) {
+		state.skinColor = skinColor;
+		setStore('SKINCOLOR', state.skinColor);
 	}
 }

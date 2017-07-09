@@ -1,7 +1,14 @@
 <template>
     <section class="read">
-        <read-content :read-content="readContent" @show-menu="showMenu"></read-content>
-        <chapter :chapters="chapters" :show="isShowChapters" v-if="chapters.length > 0"></chapter>
+        <div ref="content">
+            <read-content :read-content="readContent" @show-menu="showMenu"></read-content>
+        </div>
+        <chapter :chapters="chapters" 
+                 :show="isShowChapters" 
+                 @hide-menu="hideMenu" 
+                 v-if="chapters.length > 0">
+        </chapter>
+        <list-loading v-show="isLoading"></list-loading>
     </section>
 </template>
 
@@ -10,12 +17,15 @@ import { mapState, mapMutations } from 'vuex';
 import api from '../fetch/api';
 import chapter from '@/components/Chapter';
 import readContent from '@/components/ReadContent';
+import listLoading from '@/components/ListLoading';
+import { debounce } from '../util/util';
 
 export default {
     name: 'read',
     components: {
         chapter,
-        readContent
+        readContent,
+        listLoading
     },
     data() {
         return {
@@ -25,7 +35,13 @@ export default {
             readContent: {
                 title: '',
                 contentList: []
-            }
+            },
+            isLoading: true,
+            isEnding: false,
+            $body: null,
+            $content: null,
+            clientHeight: 0,
+            readIndex: 0
         }
     },
     computed: {
@@ -36,7 +52,7 @@ export default {
     },
     watch: {
         chapters: function () {
-            this.fetchChapterContent(this.chapters[0].id);
+            this.fetchChapterContent(this.chapters[this.readIndex].id);
         }
     },
     created() {
@@ -48,17 +64,12 @@ export default {
             }
         }
         this.fetchChapters(this.bookId);
-        // this.fetchChapterContent(this.chapters[0].id);
-        // api.getChapters(this.bookId)
-        //     .then(data => {
-        //         this.chapters = data;
-
-        //         api.getChapterContent(data[0].id)
-        //             .then(data => {
-        //                 this.title = data.title;
-        //                 this.contentList = data.cpContent.split('\n');
-        //             })
-        //     })
+    },
+    mounted() {
+        this.$body = document.body;
+        this.clientHeight = this.$body.clientHeight;
+        this.$content = this.$refs.content;
+        // window.addEventListener('scroll', debounce(this.loadMore));
     },
     methods: {
         ...mapMutations([
@@ -74,11 +85,27 @@ export default {
             api.getChapterContent(chapterId)
                 .then(data => {
                     this.readContent.title = data.title;
-                    this.readContent.contentList = data.cpContent.split('\n');
+                    this.readContent.contentList.push(...data.cpContent.split('\n'));
+                    this.isLoading = false;
                 })
         },
         showMenu: function () {
             this.isShowChapters = true;
+        },
+        hideMenu: function () {
+            this.isShowChapters = false;
+        },
+		loadMore: function () {
+            let scrollTop = this.$body.scrollTop;
+            let eight = this.$content.offsetHeight;
+            if (eight - scrollTop - this.clientHeight < this.clientHeight * 5) {
+                if (this.isEnding === true) {
+                    return;
+                }
+                this.readIndex++;
+                this.isLoading = true;
+                this.fetchChapterContent(this.chapters[this.readIndex].id);
+            }
         }
     }
 }
@@ -86,8 +113,8 @@ export default {
 
 <style lang="scss">
 .read {
-    position: relative; // overflow: hidden;
-    // padding: 10px 15px;
+    position: relative;
+    height: 100%;
 }
 </style>
 

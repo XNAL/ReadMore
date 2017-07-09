@@ -17,7 +17,9 @@
 		<p class="book-bar-content">已加入书架</p>
 	</div>
 	<div class="book-bar-item read">
-		<p class="book-bar-content">立即阅读</p>
+		<router-link :to="{ name: 'read', params: { id: curBook.id }}">
+			<p class="book-bar-content">立即阅读</p>
+		</router-link>
 	</div>
 </section>
 </template>

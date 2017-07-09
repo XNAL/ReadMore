@@ -11,7 +11,8 @@ const state = {
 	headerTitle: 'RM',	//头部标题
 	headerType: '',		//头部类型：featured:精选、rank:排行榜
 	shelfBookList: [],	//书架书籍对象数组
-	nightMode: false	//是否夜间模式
+	nightMode: false,	//是否夜间模式
+	skinColor: ''		//阅读页面背景色
 }
 
 export default new Vuex.Store({
