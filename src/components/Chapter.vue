@@ -58,6 +58,9 @@ export default {
         reverseChapters: function () {
             this.sort = !this.sort;
             this.chapters.reverse();
+        },
+        selectChapter: function (chapterId) {
+            this.$emit('select-chapter', chapterId);
         }
     }
 }
@@ -109,7 +112,7 @@ export default {
     .chapter-head {
         font-size: 13px;
         font-weight: 500;
-        padding: 0 20px;        
+        padding: 0 20px;
         line-height: 40px;
         .icon {
             font-size: 13px;
@@ -148,5 +151,3 @@ export default {
     }
 }
 </style>
-
-

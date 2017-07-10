@@ -9,11 +9,12 @@
             </span>
         </div>
         <div class="read-content-content">
-            <h4 :class="skinColor">{{ readContent.title }}</h4>
-            <div class="content-list" v-if="readContent.contentList.length > 0">
-                <!--<h3>{{ readContent.title }}</h3>-->
-                <p v-for="content in readContent.contentList">{{ content }}</p>
+            <h4 :class="skinColor">{{ curBook.title }}</h4>
+            <div class="content-list" v-for="rc in readContent" v-if="readContent.length > 0">
+                <h3>{{ rc.contentTitle }}</h3>
+                <p v-for="content in rc.contentList" v-if="content.trim() !== ''">{{ content }}</p>
             </div>
+            <button class="nextChapter" @click="$emit('next-chapter')">加载下一章</button>
         </div>
         <div :class="['read-content-set', { 'read-opt': isShowSet }]">
             <ul class="read-set-bg-list">
@@ -77,10 +78,11 @@ import { mapState, mapMutations } from 'vuex';
 export default {
     name: 'readContent',
     props: {
-        readContent: Object
+        readContent: Array
     },
     computed: {
         ...mapState([
+            'curBook',
             'nightMode',
             'skinColor'
         ])
@@ -166,7 +168,7 @@ export default {
     .read-content-content {
         position: relative;
         overflow: hidden;
-        padding: 30px 15px 20px;
+        padding: 10px 15px 20px;
         font-size: 14px;
         h4 {
             font-size: 12px;
@@ -181,12 +183,26 @@ export default {
             z-index: 9;
         }
         .content-list {
+            h3 {
+                margin-top: 30px;
+                line-height: 40px;
+                font-size: 16px;
+            }
             p {
                 text-indent: 2em;
                 margin: 0.5em 0;
                 letter-spacing: 0;
                 line-height: 1.5;
             }
+        }
+        button.nextChapter {
+            display: block;
+            margin: 20px auto 0;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            background-color: #ed424b;
         }
     }
     .read-content-set {
@@ -323,5 +339,3 @@ export default {
     background-color: #1a1a1a;
 }
 </style>
-
-

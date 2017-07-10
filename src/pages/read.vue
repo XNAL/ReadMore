@@ -1,11 +1,15 @@
 <template>
     <section class="read">
         <div ref="content">
-            <read-content :read-content="readContent" @show-menu="showMenu"></read-content>
+            <read-content :read-content="readContent"
+                          @show-menu="showMenu"
+                          @next-chapter = "nextChapter">
+            </read-content>
         </div>
-        <chapter :chapters="chapters" 
-                 :show="isShowChapters" 
-                 @hide-menu="hideMenu" 
+        <chapter :chapters="chapters"
+                 :show="isShowChapters"
+                 @hide-menu="hideMenu"
+                 @select-chapter = 'selectChapter'
                  v-if="chapters.length > 0">
         </chapter>
         <list-loading v-show="isLoading"></list-loading>
@@ -32,10 +36,7 @@ export default {
             bookId: '',
             chapters: [],
             isShowChapters: false,
-            readContent: {
-                title: '',
-                contentList: []
-            },
+            readContent: [],
             isLoading: true,
             isEnding: false,
             $body: null,
@@ -84,8 +85,10 @@ export default {
         fetchChapterContent(chapterId) {
             api.getChapterContent(chapterId)
                 .then(data => {
-                    this.readContent.title = data.title;
-                    this.readContent.contentList.push(...data.cpContent.split('\n'));
+                    this.readContent.push({
+                        contentTitle: data.title,
+                        contentList: data.cpContent.split('\n')
+                    });
                     this.isLoading = false;
                 })
         },
@@ -94,6 +97,31 @@ export default {
         },
         hideMenu: function () {
             this.isShowChapters = false;
+        },
+        nextChapter: function() {
+            if (this.readIndex === this.chapters.length - 1) {
+                return;
+            }
+            this.readIndex++;
+            this.isLoading = true;
+            this.fetchChapterContent(this.chapters[this.readIndex].id);
+        },
+        selectChapter: function(chapterId) {            
+            this.isShowChapters = false;
+            for (let [index, value] of Object.entries(this.chapters)) {
+                if (value.id === chapterId) {
+                    this.readIndex = index;
+                    break;
+                }
+            }
+            api.getChapterContent(chapterId)
+                .then(data => {
+                    this.readContent.splice(0, this.readContent.length);
+                    this.readContent.push({
+                        contentTitle: data.title,
+                        contentList: data.cpContent.split('\n')
+                    });
+                })
         },
 		loadMore: function () {
             let scrollTop = this.$body.scrollTop;
@@ -107,6 +135,16 @@ export default {
                 this.fetchChapterContent(this.chapters[this.readIndex].id);
             }
         }
+    },
+    beforeRouteLeave (to, from, next) {
+        // if(confirm('还没有加入书架，是否加入书架')){
+        //     console.log('是');
+        //     next();
+        // } else {
+        //     console.log('否');
+        //     next();
+        // }
+        next();
     }
 }
 </script>
@@ -117,5 +155,3 @@ export default {
     height: 100%;
 }
 </style>
-
-
