@@ -1,5 +1,5 @@
 <template>
-    <section :class="['read-content', skinColor, { night: nightMode }]" ref="content">
+    <section :class="['read-content', skinColor, { night: nightMode }]">
         <div class="read-action-mid" @click="showOpt"></div>
         <div :class="['read-content-header', { 'read-opt': isShowOpt }]">
             <span class="back" @click="$router.go(-1)">
@@ -9,25 +9,37 @@
             </span>
         </div>
         <div class="read-content-content">
-            <h4 :class="skinColor">{{ curBook.title }}</h4>
+            <h4 :class="[skinColor, { night: nightMode }]">{{ curBook.title }}</h4>
             <div class="content-list" v-for="rc in readContent" v-if="readContent.length > 0">
                 <h3>{{ rc.contentTitle }}</h3>
-                <p v-for="content in rc.contentList" v-if="content.trim() !== ''">{{ content }}</p>
+                <p v-for="content in rc.contentList" v-if="content.trim() !== ''" :style="{ fontSize: fontSize + 'px' }">{{ content }}</p>
             </div>
             <button class="nextChapter" @click="$emit('next-chapter')">加载下一章</button>
         </div>
         <div :class="['read-content-set', { 'read-opt': isShowSet }]">
             <ul class="read-set-bg-list">
                 <li v-for="skin in skinBgList" class="read-set-bg-item" @click="changeBkColor(skin)" :key="skin">
-                    <span :class="[skin, { active: skin === skinColor }]"></span>
+                    <span :class="[skin, { active: skin === skinColor }]">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-selected"></use>
+                        </svg>
+                    </span>
                 </li>
             </ul>
             <div class="read-set-switch">
                 <div class="read-set-switch-item">
-                    <span :class="{ active: !isSwipeLR}" @click="setSwipeMode(false)">上下滑动</span>
+                    <span :class="{ nochange: fontSize <= 10 }" @click="changeFontSize(false)">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-font-reduce"></use>
+                        </svg>
+                    </span>
                 </div>
                 <div class="read-set-switch-item">
-                    <span :class="{ active: isSwipeLR}" @click="setSwipeMode(true)">左右滑动</span>
+                    <span :class="{ nochange: fontSize >= 24 }" @click="changeFontSize(true)">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-font-add"></use>
+                        </svg>
+                    </span>
                 </div>
             </div>
         </div>
@@ -80,36 +92,46 @@ export default {
     props: {
         readContent: Array
     },
+    watch: {
+        //当为点击目录进入阅读界面时，滚动条回到顶部
+        readContent: function () {
+            if (this.readContent.length === 1) {
+                document.body.scrollTop = 0;
+            }
+        }
+    },
     computed: {
         ...mapState([
             'curBook',
             'nightMode',
-            'skinColor'
+            'skinColor',
+            'fontSize'
         ])
     },
     data() {
         return {
             isShowOpt: false,
             isShowSet: false,
-            isSwipeLR: false,
             skinBgList: ['skin-default', 'skin-blue', 'skin-green', 'skin-pink', 'skin-dark', 'skin-light']
         }
     },
     created() {
-        if(!this.skinBgList.includes(this.skinColor)) {
+        if (!this.skinBgList.includes(this.skinColor)) {
             this.SET_SKIN_COLOR('skin-default');
         }
     },
     methods: {
         ...mapMutations([
             'SET_NIGHT_MODE',
-            'SET_SKIN_COLOR'
+            'SET_SKIN_COLOR',
+            'SET_FONT_SIZE'
         ]),
         showMenu: function () {
-            this.isShowOpt = false;
+            this.isShowOpt = this.isShowSet = false;
             this.$emit('show-menu');
         },
         switchMode: function () {
+            this.isShowSet = false;
             this.SET_NIGHT_MODE(!this.nightMode);
         },
         showOpt() {
@@ -120,11 +142,15 @@ export default {
             }
         },
         showOptSet() {
-            this.isShowOpt = false;
             this.isShowSet = true;
         },
-        setSwipeMode(swipeLR) {
-            this.isSwipeLR = swipeLR;
+        changeFontSize(isAdd) {
+            if ((this.fontSize >= 24 && isAdd) || (this.fontSize <= 10 && !isAdd)) {
+                return;
+            }
+            let size = this.fontSize;
+            isAdd ? size++ : size--
+            this.SET_FONT_SIZE(size);
         },
         changeBkColor(skin) {
             this.SET_NIGHT_MODE(false);
@@ -184,23 +210,24 @@ export default {
         }
         .content-list {
             h3 {
-                margin-top: 30px;
-                line-height: 40px;
-                font-size: 16px;
+                margin: 30px 0 20px; // line-height: 40px;
+                font-size: 20px;
             }
             p {
                 text-indent: 2em;
                 margin: 0.5em 0;
                 letter-spacing: 0;
-                line-height: 1.5;
+                line-height: 1.8;
             }
         }
         button.nextChapter {
             display: block;
             margin: 20px auto 0;
-            padding: 10px 20px;
+            width: 80%;
+            font-size: 16px;
+            line-height: 36px;
             border: none;
-            border-radius: 8px;
+            border-radius: 100px;
             color: #fff;
             background-color: #ed424b;
         }
@@ -209,11 +236,11 @@ export default {
         position: fixed;
         left: 0;
         right: 0;
-        bottom: 0;
+        bottom: 50px;
         font-size: 14px;
-        overflow: hidden;
-        transform: translateY(100%);
-        transition: transform .15s;
+        overflow: hidden; // transform: translateY(100%);
+        opacity: 0;
+        transition: opacity .15s;
         color: #fff;
         background-color: rgba(0, 0, 0, .9);
 
@@ -227,14 +254,27 @@ export default {
                 flex: 1;
                 text-align: center;
                 span {
+                    position: relative;
                     display: inline-block;
                     width: 30px;
                     height: 30px;
                     border-radius: 50%;
                     border: 2px solid rgba(0, 0, 0, .9);
 
+                    .icon {
+                        position: absolute;
+                        top: 6px;
+                        left: 7px;
+                        font-size: 16px;
+                        color: #ed424b;
+                        opacity: 0;
+                    }
+
                     &.active {
                         border-color: #ed424b;
+                        .icon {
+                            opacity: 1;
+                        }
                     }
                 }
             }
@@ -251,14 +291,14 @@ export default {
                     width: 80%;
                     margin: 0 10%;
                     border: 1px solid #fff;
-                    border-radius: 4px;
-                    padding: 10px 0;
+                    border-radius: 100px;
+                    line-height: 36px;
                     text-align: center;
-                    transition: opacity .15s;
-                    opacity: .4;
+                    font-size: 20px;
+                    color: #fff;
 
-                    &.active {
-                        opacity: 1;
+                    &.nochange {
+                        opacity: .6;
                     }
                 }
             }
@@ -298,6 +338,7 @@ export default {
     }
     .read-opt {
         transform: translateY(0%);
+        opacity: 1;
     }
 
     .read-action-mid {

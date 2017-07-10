@@ -6,7 +6,8 @@ import {
 	SET_HEADER_INFO,
 	SET_CUR_BOOK,
 	SET_NIGHT_MODE,
-	SET_SKIN_COLOR
+	SET_SKIN_COLOR,
+	SET_FONT_SIZE
 } from './mutation-types';
 
 import {
@@ -69,5 +70,10 @@ export default {
 	[SET_SKIN_COLOR](state, skinColor) {
 		state.skinColor = skinColor;
 		setStore('SKINCOLOR', state.skinColor);
+	},
+
+	[SET_FONT_SIZE](state, fontSize) {
+		state.fontSize = fontSize;
+		setStore('FONTSIZE', state.fontSize);
 	}
 }
