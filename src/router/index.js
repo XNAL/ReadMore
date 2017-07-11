@@ -12,53 +12,52 @@ import Read from '@/pages/read';
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
-  routes: [
-    {
-      path: '/',
-      name: 'shelf',
-      component: Shelf
-    },
-    {
-      path: '/featured',
-      name: 'featured',
-      component: Featured
-    },
-    {
-      path: '/category',
-      name: 'category',
-      component: Category
-    },
-    {
-      path: '/catlist/:major',
-      name: 'catlist',
-      component: CatList
-    },
-    {
-      path: '/rank',
-      name: 'rank',
-      component: Rank
-    },
-    {
-      path: '/list/:id',
-      name: 'list',
-      component: List
-    },
-    {
-      path: '/book/:id',
-      name: 'book',
-      component: Book
-    },
-    {
-      path: '/read/:id',
-      name: 'read',
-      component: Read
-    }
-  ]
-  // scrollBehavior(to, from, savedPosition) {
-  //   return {
-  //     x: 0,
-  //     y: 0
-  //   }
-  // }
+	mode: 'history',
+	routes: [{
+			path: '/',
+			name: 'shelf',
+			component: Shelf
+		},
+		{
+			path: '/featured',
+			name: 'featured',
+			component: Featured
+		},
+		{
+			path: '/category',
+			name: 'category',
+			component: Category
+		},
+		{
+			path: '/catlist/:major',
+			name: 'catlist',
+			component: CatList
+		},
+		{
+			path: '/rank',
+			name: 'rank',
+			component: Rank
+		},
+		{
+			path: '/list/:id',
+			name: 'list',
+			component: List
+		},
+		{
+			path: '/book/:id',
+			name: 'book',
+			component: Book
+		},
+		{
+			path: '/read/:id',
+			name: 'read',
+			component: Read
+		}
+	],
+	scrollBehavior(to, from, savedPosition) {
+		return {
+			x: 0,
+			y: 0
+		}
+	}
 })

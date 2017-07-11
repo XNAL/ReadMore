@@ -1,7 +1,7 @@
 <template>
 	<div class="featured">
 		<header-bar :sex="sex" v-on:change-sex="changeSex"></header-bar>
-		<div class="featured-book-list">
+		<div class="featured-book-list" ref="featuredBookList">
 			<swiper></swiper>
 			<section class="book-list-section" v-for="module in modules" v-if="module.type === 0" :key="module._id">
 				<div class="book-list-top">
@@ -69,6 +69,7 @@ export default {
 				});
 		},
 		changeSex: function(sex) {
+			document.body.scrollTop = 0;
 			this.sex = sex;
 			this.fetchData();
 		}

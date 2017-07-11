@@ -53,7 +53,20 @@ export default {
     },
     watch: {
         chapters: function () {
+            if (this.curBook.readChapter !== '') {
+                for (let [idx, chapter] of Object.entries(this.chapters)) {
+                    if (this.curBook.readChapter === chapter.id) {
+                        this.readIndex = idx;
+                        break;
+                    }
+                }
+            }
             this.fetchChapterContent(this.chapters[this.readIndex].id);
+        },
+        readIndex: function () {
+            let book = this.curBook;
+            book.readChapter = this.chapters[this.readIndex].id;
+            this.SET_CUR_BOOK(book);
         }
     },
     created() {
@@ -106,7 +119,7 @@ export default {
             this.isLoading = true;
             this.fetchChapterContent(this.chapters[this.readIndex].id);
         },
-        selectChapter: function(chapterId) {            
+        selectChapter: function(chapterId) {
             this.isShowChapters = false;
             for (let [index, value] of Object.entries(this.chapters)) {
                 if (value.id === chapterId) {

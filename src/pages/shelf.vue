@@ -4,6 +4,7 @@
         <shelf-list v-if="shelfBookList.length > 0"></shelf-list>
         <empty v-else></empty>
         <tabbar></tabbar>
+        <page-loading v-if="isShowPageLoading"></page-loading>
     </section>
 </template>
 
@@ -13,6 +14,7 @@ import empty from '@/components/Empty';
 import tabbar from '@/components/Tabbar';
 import headerBar from '@/components/Header';
 import shelfList from '@/components/ShelfList';
+import pageLoading from '@/components/PageLoading';
 import { SHELF_PAGE } from '../util/util';
 
 export default {
@@ -21,7 +23,8 @@ export default {
         empty,
         tabbar,
         headerBar,
-		shelfList
+		shelfList,
+        pageLoading
     },
 	computed: {
 		...mapState([
@@ -30,6 +33,7 @@ export default {
 	},
     data() {
         return {
+            isShowPageLoading: true,
             bookList: []
         }
     },
@@ -38,6 +42,7 @@ export default {
 			title: '我的书架',
 			type: SHELF_PAGE
 		});
+        this.isShowPageLoading = false;
     },
     methods: {
 		...mapMutations([

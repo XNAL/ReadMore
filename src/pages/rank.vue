@@ -31,6 +31,7 @@
 		</section>
 
 		<tabbar></tabbar>
+        <page-loading v-if="isShowPageLoading"></page-loading>
 	</div>
 </template>
 
@@ -41,6 +42,7 @@ import bookList from '@/components/BookList';
 import listLoading from '@/components/ListLoading';
 import headerBar from '@/components/Header';
 import tabbar from '@/components/Tabbar';
+import pageLoading from '@/components/PageLoading';
 import { RANK_PAGE } from '../util/util';
 
 export default {
@@ -49,7 +51,8 @@ export default {
 		bookList,
 		listLoading,
 		headerBar,
-		tabbar
+		tabbar,
+		pageLoading
 	},
 	data() {
 		return {
@@ -58,6 +61,7 @@ export default {
 			femaleRankList: [],
 			rankId: '',
 			bookList: [],
+	        isShowPageLoading: true,
 			isLoading: true
 		};
 	},
@@ -90,6 +94,7 @@ export default {
 					this.maleRankList = data.male;
 					this.femaleRankList = data.female;
 					this.rankId = this.maleRankList[0]._id;
+					this.isShowPageLoading = false;
 				})
 		},
 		changeSex: function(sex) {

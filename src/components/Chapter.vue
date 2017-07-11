@@ -21,7 +21,10 @@
         <div class="chapter-list-section">
             <div class="chapter-bar">正文卷</div>
             <ul class="chapter-list">
-                <li class="chapter-item" v-for="chapter in chapters" :key="chapter.id" @click="selectChapter(chapter.id)">
+                <li :class="['chapter-item', { active: chapter.id === curBook.readContent }]"
+                    v-for="chapter in chapters"
+                    :key="chapter.id"
+                    @click="selectChapter(chapter.id)">
                     <p>{{ chapter.title }}
                         <span class="vip fr" v-if="chapter.isVip">
                             <svg class="icon red" aria-hidden="true">
@@ -145,6 +148,9 @@ export default {
         white-space: nowrap;
         text-overflow: ellipsis;
 
+        &.active {
+            color: #ed424b;
+        }
         .icon {
             font-size: 16px;
         }

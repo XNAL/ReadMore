@@ -60,6 +60,15 @@ export default {
 
 	[SET_CUR_BOOK](state, book) {
 		state.curBook = book;
+		if (state.curBook.isInShelf) {
+			for(let [idx, shelfBook] of Object.entries(state.shelfBookList)) {
+				if (shelfBook.id === state.curBook.id) {
+					state.shelfBookList.splice(idx, 1, state.curBook);
+					setStore('SHEFLBOOK', state.shelfBookList);
+					break;
+				}
+			}
+		}
 	},
 
 	[SET_NIGHT_MODE](state, isNight) {

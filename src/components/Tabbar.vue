@@ -55,6 +55,7 @@ export default {
     height: 60px;
     background-color: #fff;
     border-top: 1px solid rgba(0, 0, 0, .1);
+    box-sizing: border-box;
 
     .tab-item {
         display: block;

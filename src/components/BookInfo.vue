@@ -74,14 +74,14 @@ export default {
 		api.getBook(this.curBook.id)
 			.then(data => {
 				this.book = data;
-				this.SET_CUR_BOOK({
-					id: this.curBook.id,
-					title: data.title,
-					cover: staticPath + data.cover,
-					author: data.author,
-					lastChapter: data.lastChapter,
-					updated: data.updated
-				})
+
+				let tmpBook = this.curBook;
+				tmpBook.title = data.title;
+				tmpBook.cover = staticPath + data.cover;
+				tmpBook.author = data.author;
+				tmpBook.lastChapter = data.lastChapter;
+				tmpBook.updated = data.updated;
+				this.SET_CUR_BOOK(tmpBook);
 			});
 	},
 	methods: {
