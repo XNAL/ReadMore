@@ -91,6 +91,13 @@ export default {
 	  return async(chapterUrl + '/chapter/' + id, {
 		  cv: '1495097622174'
 	  }).then(data => data.chapter);
+  },
+
+  getShelfBookUpdate(ids) {
+    return async(apiUrl + '/book', {
+      view: 'updated',
+      id: ids.toString()
+    })
   }
 }
 

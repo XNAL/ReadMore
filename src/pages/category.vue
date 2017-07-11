@@ -5,6 +5,7 @@
             <cat v-for="category in categories" :category="category" v-if="category !== null" :key="category.title"></cat>
         </div>
         <tabbar></tabbar>
+        <page-loading v-if="isShowPageLoading"></page-loading>
     </div>
 </template>
 
@@ -15,16 +16,19 @@ import api from '../fetch/api';
 import cat from '@/components/Cat';
 import headerBar from '@/components/Header';
 import tabbar from '@/components/Tabbar';
+import pageLoading from '@/components/PageLoading';
 
 export default {
     name: 'category',
     components: {
         cat,
         headerBar,
-        tabbar
+        tabbar,
+        pageLoading
     },
     data() {
         return {
+            isShowPageLoading: true,
             headerTitle: '分类',
             categories: []
         }
@@ -74,6 +78,7 @@ export default {
                             this.categories.push(obj);
                         }
                     }
+                    this.isShowPageLoading = false;
                 })
         }
     }

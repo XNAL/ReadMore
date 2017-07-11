@@ -10,10 +10,11 @@
 						<router-link :to="{ name: 'list', params: {id : module._id} }" class="red">更多</router-link>
 					</div>
 				</div>
-				<home-list :book-info="{ id: module._id }"></home-list>
+				<home-list :book-info="{ id: module._id }" @load-result="loadResult"></home-list>
 			</section>
 		</div>
 		<tabbar></tabbar>
+		<page-loading v-if="isShowPageLoading"></page-loading>
 	</div>
 </template>
 
@@ -24,6 +25,7 @@ import homeList from '@/components/HomeList';
 import swiper from '@/components/Swiper';
 import tabbar from '@/components/Tabbar';
 import headerBar from '@/components/Header';
+import pageLoading from '@/components/PageLoading';
 import { FEATURED_PAGE } from '../util/util';
 
 export default {
@@ -32,13 +34,23 @@ export default {
 		headerBar,
 		swiper,
 		homeList,
-		tabbar
+		tabbar,
+		pageLoading
 	},
 	data() {
 		return {
+			isShowPageLoading: true,
 			sex: 'male',		// 默认为男生
-			modules: []
+			modules: [],
+			loadModules: []
 		};
+	},
+	watch: {
+		loadModules: function () {
+			if(this.loadModules.length === 0) {
+				this.isShowPageLoading = false;
+			}
+		}
 	},
 	created: function () {
 		this.SET_HEADER_INFO({
@@ -63,15 +75,20 @@ export default {
 					});
 					let sexOrder = this.sex === 'male' ? [2, 5, 7, 9] : [1, 4, 6, 8];
 					data = data.filter((obj) => {
-						return sexOrder.includes(obj.order);
+						return sexOrder.includes(obj.order) && obj.type === 0;
 					});
 					this.modules = data;
+					this.loadModules = Array.from(data, value => value._id);
 				});
 		},
-		changeSex: function(sex) {
+		changeSex: function (sex) {
+			this.isShowPageLoading = true;
 			document.body.scrollTop = 0;
 			this.sex = sex;
 			this.fetchData();
+		},
+		loadResult: function (id) {
+			this.loadModules.splice(this.loadModules.indexOf(id), 1);
 		}
 	}
 

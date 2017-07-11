@@ -57,6 +57,7 @@ export default {
 				})
 				.then(data => {
 					this.bookList = data;
+                    this.$emit('load-result', this.bookInfo.id);
 				})
 		}
 	}

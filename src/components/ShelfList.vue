@@ -25,6 +25,7 @@
 <script>
 import {mapState, mapMutations} from 'vuex';
 import moment from 'moment';
+import api from '../fetch/api';
 
 export default {
 	name: 'shelfList',
@@ -42,6 +43,18 @@ export default {
 	computed: {
 		...mapState([
 			'shelfBookList'
+		])
+	},
+	created() {
+		var bookIds = Array.from(this.shelfBookList, book => book.id);
+		api.getShelfBookUpdate(bookIds)
+			.then(data => {
+				this.SHELF_BOOK_UPDATE(data);
+			})
+	},
+	methods: {
+		...mapMutations([
+			'SHELF_BOOK_UPDATE'
 		])
 	}
 }

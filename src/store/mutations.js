@@ -3,6 +3,7 @@ import {
 	ADD_TO_SHELF,
 	DEL_FROM_SHELF,
 	DEL_ALL_SHELF,
+	SHELF_BOOK_UPDATE,
 	SET_HEADER_INFO,
 	SET_CUR_BOOK,
 	SET_NIGHT_MODE,
@@ -57,7 +58,18 @@ export default {
 		state.shelfBookList.clear();
 		removeStore('SHEFLBOOK');
 	},
-
+	[SHELF_BOOK_UPDATE](state, data) {
+		for(let value of Object.values(data)) {
+			for(let [idx, book] of Object.entries(state.shelfBookList)) {
+				if(book.id === value._id) {
+					book.updated = value.updated;
+					book.lastChapter = value.lastChapter;
+					state.shelfBookList[idx] = book;
+					break;
+				}
+			}
+		}
+	},
 	[SET_CUR_BOOK](state, book) {
 		state.curBook = book;
 		if (state.curBook.isInShelf) {
