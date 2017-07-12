@@ -1,10 +1,11 @@
 <template>
 <div class="book">
 	<backbar :title="title"></backbar>
-	<book-info></book-info>
+	<book-info @load-result="loadResult"></book-info>
 	<review></review>
 	<recommend></recommend>
 	<bookbar></bookbar>
+	<page-loading v-if="isShowPageLoading"></page-loading>
 </div>
 </template>
 
@@ -18,6 +19,8 @@ import bookInfo from '@/components/BookInfo';
 import review from '@/components/Review';
 import recommend from '@/components/Recommend';
 import bookbar from '@/components/Bookbar';
+import pageLoading from '@/components/PageLoading';
+import { BOOK_PAGE } from '../util/util';
 
 export default {
 	name: 'book',
@@ -26,10 +29,12 @@ export default {
 		bookInfo,
 		review,
 		recommend,
-		bookbar
+		bookbar,
+		pageLoading
 	},
 	data() {
 		return {
+            isShowPageLoading: true,
 			title: '书籍详情'
 		}
 	},
@@ -40,7 +45,10 @@ export default {
         ])
     },
 	created() {
-		// this.bookId = this.$route.params.id;
+		this.SET_HEADER_INFO({
+			title: '同类推荐',
+			type: BOOK_PAGE
+		});
 		let isInShelf = false;
 		for(let book of Object.values(this.shelfBookList)) {
 			if (book.id === this.$route.params.id) {
@@ -67,7 +75,10 @@ export default {
 		...mapMutations([
 			'SET_HEADER_INFO',
 			'SET_CUR_BOOK'
-		])
+		]),
+		loadResult: function() {
+			this.isShowPageLoading = false;
+		}
 	}
 }
 </script>
@@ -75,7 +86,6 @@ export default {
 <style lang="scss">
 .book {
     position: relative;
-    // height: 100%;
     overflow: hidden;
     margin: 40px 0 70px;
 }

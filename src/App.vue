@@ -10,11 +10,11 @@ import { mapMutations } from 'vuex';
 export default {
   name: 'app',
   created() {
-      this.INIT_SHELF();
+      this.INIT_STATE();
   },
   methods: {
       ...mapMutations([
-          'INIT_SHELF'
+          'INIT_STATE'
       ])
   }
 }

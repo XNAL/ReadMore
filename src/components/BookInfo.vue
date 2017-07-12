@@ -82,6 +82,7 @@ export default {
 				tmpBook.lastChapter = data.lastChapter;
 				tmpBook.updated = data.updated;
 				this.SET_CUR_BOOK(tmpBook);
+				this.$emit('load-result');
 			});
 	},
 	methods: {

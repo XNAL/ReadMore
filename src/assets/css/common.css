@@ -54,3 +54,8 @@ body {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+
+.no-more {
+    line-height: 32px;
+    text-align: center;
+}

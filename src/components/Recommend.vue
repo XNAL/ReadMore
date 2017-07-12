@@ -2,7 +2,7 @@
     <section class="recommend">
         <template v-if="recommendList.length > 0">
             <h4>同类推荐
-                <router-link :to="{ name: '', params: {} }" class="more red">更多</router-link>
+                <router-link :to="{ name: 'list', params: { id: curBook.id } }" class="more red">更多</router-link>
             </h4>
             <ul class="recommend-list">
                 <li class="recommend-item" v-for="(recommend, index) in recommendList" v-if="index < 4" :key="recommend._id">

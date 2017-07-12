@@ -22,14 +22,14 @@ export default {
 
 <style lang="scss">
 .list-loading {
-    width: 50px;
-    height: 50px;
+    width: 20px;
+    height: 20px;
     position: relative;
-    margin: 10px auto; 
+    margin: auto;
     span {
         display: inline-block;
-        width: 10px;
-        height: 10px;
+        width: 4px;
+        height: 4px;
         border-radius: 50%;
         background: #ed424b;
         position: absolute;
@@ -51,55 +51,53 @@ export default {
     span:nth-child(1) {
         left: 0;
         top: 50%;
-        margin-top: -5px;
+        margin-top: -2px;
         animation-delay: 0.1s;
     }
 
     span:nth-child(2) {
-        left: 6px;
-        top: 6px;
+        left: 2px;
+        top: 2px;
         animation-delay: 0.2s;
     }
 
     span:nth-child(3) {
         left: 50%;
         top: 0;
-        margin-left: -5px;
+        margin-left: -2px;
         animation-delay: 0.3s;
     }
 
     span:nth-child(4) {
-        top: 6px;
-        right: 6px;
+        top: 2px;
+        right: 2px;
         animation-delay: 0.4s;
     }
 
     span:nth-child(5) {
         right: 0;
         top: 50%;
-        margin-top: -5px;
+        margin-top: -2px;
         animation-delay: 0.5s;
     }
 
     span:nth-child(6) {
-        right: 6px;
-        bottom: 6px;
+        right: 2px;
+        bottom: 2px;
         animation-delay: 0.6s;
     }
 
     span:nth-child(7) {
         bottom: 0;
         left: 50%;
-        margin-left: -5px;
+        margin-left: -2px;
         animation-delay: 0.7s;
     }
 
     span:nth-child(8) {
-        bottom: 6px;
-        left: 6px;
+        bottom: 2px;
+        left: 2px;
         animation-delay: .8s;
     }
 }
 </style>
-
-

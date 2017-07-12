@@ -1,5 +1,5 @@
 <template>
-<section class="page-loading">
+<section class="page-loading" :style="styleObject">
 	<img class="loading" src="../assets/page-animation.gif" alt="翻页加载动画">
 </section>
 </template>
@@ -7,8 +7,24 @@
 <script>
 export default {
 	name: 'pageLoading',
+	props: {
+		option: Object
+	},
 	data() {
-		return {}
+		return {
+			styleObject: {
+				'top': '40px',
+				'bottom': '60px'
+			}
+		}
+	},
+	created() {
+		if (this.option && this.option.top) {
+			this.styleObject.top = this.option.top;
+		}
+		if (this.option && this.option.bottom) {
+			this.styleObject.bottom = this.option.bottom;
+		}
 	}
 }
 </script>
@@ -16,10 +32,10 @@ export default {
 <style lang="scss">
 .page-loading {
     position: fixed;
-    top: 40px;
+    // top: 40px;
     left: 0;
     right: 0;
-    bottom: 60px;
+    // bottom: 60px;
     z-index: 99999;
     background-color: #fff;
 

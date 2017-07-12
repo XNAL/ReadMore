@@ -6,14 +6,14 @@
                     <img class="book-list-book-cover fl" :src="book.cover | setCover">
                     <template v-if="headerType === type">
                         <div class="book-list-book-info book-list-book-info-rank">
-                            <h3 class="book-title">{{ book.title }}</h3>                            
+                            <h3 class="book-title">{{ book.title }}</h3>
                             <p class="book-info">
                                 <span class="book-author fl gray">
                                     <svg class="icon" aria-hidden="true">
                                         <use xlink:href="#icon-author"></use>
                                     </svg>
                                     {{ book.author }}
-                                </span>                                
+                                </span>
                             </p>
                             <p class="book-summary text-line-comm gray">{{ book.shortIntro }}</p>
                             <p class="book-info">
@@ -54,7 +54,7 @@
 <script>
 import { mapState } from 'vuex';
 import api from '../fetch/api';
-import { RANK_PAGE, staticPath } from '../util/util';
+import { RANK_PAGE, FEATURED, staticPath } from '../util/util';
 
 export default {
     name: 'bookList',
@@ -81,6 +81,9 @@ export default {
         },
 
         setCover(cover) {
+            if(cover.indexOf(staticPath) > -1) {
+                return cover;
+            }
             return staticPath + cover;
         }
     }

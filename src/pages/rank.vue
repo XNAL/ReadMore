@@ -27,6 +27,7 @@
 		</template>
 		<section class="book-list-section">
 			<book-list :book-list="bookList" v-if="bookList.length > 0"></book-list>
+			<div class="no-more" v-if="!isLoading">没有更多了</div>
 			<list-loading v-show="isLoading"></list-loading>
 		</section>
 

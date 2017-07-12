@@ -13,6 +13,7 @@
                  v-if="chapters.length > 0">
         </chapter>
         <list-loading v-show="isLoading"></list-loading>
+    	<page-loading :option = 'pageOption' v-if="isShowPageLoading"></page-loading>
     </section>
 </template>
 
@@ -22,6 +23,7 @@ import api from '../fetch/api';
 import chapter from '@/components/Chapter';
 import readContent from '@/components/ReadContent';
 import listLoading from '@/components/ListLoading';
+import pageLoading from '@/components/PageLoading';
 import { debounce } from '../util/util';
 
 export default {
@@ -29,10 +31,12 @@ export default {
     components: {
         chapter,
         readContent,
-        listLoading
+        listLoading,
+        pageLoading
     },
     data() {
         return {
+            isShowPageLoading: true,
             bookId: '',
             chapters: [],
             isShowChapters: false,
@@ -42,7 +46,11 @@ export default {
             $body: null,
             $content: null,
             clientHeight: 0,
-            readIndex: 0
+            readIndex: 0,
+			pageOption: {
+				top: '0px',
+				bottom: '0px'
+			}
         }
     },
     computed: {
@@ -103,6 +111,9 @@ export default {
                         contentList: data.cpContent.split('\n')
                     });
                     this.isLoading = false;
+                    this.$nextTick(function() {
+                        this.isShowPageLoading = false;
+                    })
                 })
         },
         showMenu: function () {
@@ -121,6 +132,7 @@ export default {
         },
         selectChapter: function(chapterId) {
             this.isShowChapters = false;
+            this.isShowPageLoading = true;
             for (let [index, value] of Object.entries(this.chapters)) {
                 if (value.id === chapterId) {
                     this.readIndex = index;
@@ -134,6 +146,9 @@ export default {
                         contentTitle: data.title,
                         contentList: data.cpContent.split('\n')
                     });
+                    this.$nextTick(function() {
+                        this.isShowPageLoading = false;
+                    })
                 })
         },
 		loadMore: function () {

@@ -3,6 +3,7 @@ export const FEATURED_PAGE = 'FEATURED';
 export const SHELF_PAGE = 'SHELF';
 export const RANK_PAGE = 'RANK';
 export const CATEGORY_PAGE = 'CATEGORY';
+export const BOOK_PAGE = 'BOOK';
 
 
 // 图片根路径

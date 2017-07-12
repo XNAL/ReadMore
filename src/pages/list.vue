@@ -2,13 +2,20 @@
 <section class="list-section" ref="list">
 	<backbar :title="title"></backbar>
 	<book-list :book-list="list" v-if="list.length > 0"></book-list>
+	<div class="no-more" v-if="!isEnding">没有更多了</div>
 	<list-loading v-show="isLoading"></list-loading>
 </section>
 </template>
 
 <script>
+import {
+	mapState
+} from 'vuex';
 import api from '../fetch/api';
-import {debounce} from '../util/util';
+import {
+	BOOK_PAGE,
+	debounce
+} from '../util/util';
 import bookList from '@/components/BookList';
 import backbar from '@/components/Backbar';
 import listLoading from '@/components/ListLoading';
@@ -33,7 +40,16 @@ export default {
 			clientHeight: 0
 		}
 	},
+	computed: {
+		...mapState([
+			'headerTitle',
+			'headerType'
+		])
+	},
 	created: function() {
+		if (this.headerType === BOOK_PAGE) {
+			this.title = this.headerTitle;
+		}
 		this.id = this.$route.params.id;
 		this.fetchData();
 	},
@@ -45,21 +61,34 @@ export default {
 	},
 	methods: {
 		fetchData: function() {
-			api.getBookList(this.id, this.page)
-				.then(data => {
-                    this.title = data[0].node.title;
-					data = data.map(value => {
-						return value.book;
-					});
-					return data;
-				})
-				.then(data => {
-					if (data.length < 10) {
-						this.isEnding = true;
-					}
-					this.list.push(...data);
-					this.isLoading = false;
-				})
+			if (this.headerType === BOOK_PAGE) {
+				api.getRecommend(this.id)
+					.then(data => {
+						this.list = data;
+						this.$nextTick(function() {
+							this.isEnding = true;
+							this.isLoading = false;
+						})
+					})
+			} else {
+				api.getBookList(this.id, this.page)
+					.then(data => {
+						this.title = data[0].node.title;
+						data = data.map(value => {
+							return value.book;
+						});
+						return data;
+					})
+					.then(data => {
+						if (data.length < 10) {
+							this.isEnding = true;
+						}
+						this.list.push(...data);
+						this.$nextTick(function() {
+							this.isLoading = false;
+						})
+					})
+			}
 		},
 		loadMore: function() {
 			let scrollTop = this.$body.scrollTop;

@@ -8,6 +8,7 @@ import List from '@/pages/list';
 import Shelf from '@/pages/shelf';
 import Book from '@/pages/book';
 import Read from '@/pages/read';
+import Search from '@/pages/search';
 
 Vue.use(Router);
 
@@ -52,6 +53,11 @@ export default new Router({
 			path: '/read/:id',
 			name: 'read',
 			component: Read
+		},
+		{
+			path: '/search',
+			name: 'search',
+			component: Search
 		}
 	],
 	scrollBehavior(to, from, savedPosition) {

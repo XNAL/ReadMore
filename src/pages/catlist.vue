@@ -9,7 +9,9 @@
 
 <script>
 import api from '../fetch/api';
-import {debounce} from '../util/util';
+import {
+	debounce
+} from '../util/util';
 import bookList from '@/components/BookList';
 import backbar from '@/components/Backbar';
 import catbar from '@/components/Catbar';
@@ -57,9 +59,9 @@ export default {
 				.then(data => {
 					if (data.length < this.limit) {
 						this.isEnding = true;
+						this.isLoading = false;
 					}
 					this.list.push(...data);
-					this.isLoading = false;
 				})
 		},
 		loadMore: function() {

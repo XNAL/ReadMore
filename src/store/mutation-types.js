@@ -1,4 +1,4 @@
-export const INIT_SHELF = 'INIT_SHELF';
+export const INIT_STATE = 'INIT_STATE';
 export const ADD_TO_SHELF = 'ADD_TO_SHELF';
 export const DEL_FROM_SHELF = 'DEL_FROM_SHELF';
 export const DEL_ALL_SHELF = 'DEL_ALL_SHELF';
@@ -8,3 +8,5 @@ export const SET_CUR_BOOK = 'SET_CUR_BOOK';
 export const SET_NIGHT_MODE = 'SET_NIGHT_MODE';
 export const SET_SKIN_COLOR = 'SET_SKIN_COLOR';
 export const SET_FONT_SIZE = 'SET_FONT_SIZE';
+export const SET_SEARCH_HISTORY = 'SET_SEARCH_HISTORY';
+export const CLEAR_SEARCH_HISTORY = 'CLEAR_SEARCH_HISTORY';
