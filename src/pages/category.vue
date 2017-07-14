@@ -78,7 +78,9 @@ export default {
                             this.categories.push(obj);
                         }
                     }
-                    this.isShowPageLoading = false;
+                    this.$nextTick(function () {
+                        this.isShowPageLoading = false;
+                    })
                 })
         }
     }

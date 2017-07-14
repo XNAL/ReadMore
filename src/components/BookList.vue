@@ -115,11 +115,12 @@ export default {
 
         .book-list-book-info {
             position: relative;
+            overflow: hidden;
 
             .book-title {
                 color: #333;
                 line-height: 1;
-                margin: 3px 0 10px;
+                margin: 5px 0 8px;
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 overflow: hidden;

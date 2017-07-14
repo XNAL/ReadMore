@@ -49,6 +49,7 @@ export default {
 			title: '同类推荐',
 			type: BOOK_PAGE
 		});
+		// 如果当前书籍已存在书架中，则书架中的书籍设置为当前书籍
 		let isInShelf = false;
 		for(let book of Object.values(this.shelfBookList)) {
 			if (book.id === this.$route.params.id) {

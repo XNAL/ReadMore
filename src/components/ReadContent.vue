@@ -8,6 +8,11 @@
                 </svg>
             </span>
         </div>
+        <div :class="['read-join-shelf', { 'read-opt': isShowOpt }]"
+             @click="addToShelf">
+            <span v-if="isAdded">已在书架</span>
+           <span v-else>加入书架</span>
+        </div>
         <div class="read-content-content">
             <h4 :class="[skinColor, { night: nightMode }]">{{ curBook.title }}</h4>
             <div class="content-list" v-for="rc in readContent" v-if="readContent.length > 0">
@@ -110,12 +115,14 @@ export default {
     },
     data() {
         return {
+            isAdded: false,
             isShowOpt: false,
             isShowSet: false,
             skinBgList: ['skin-default', 'skin-blue', 'skin-green', 'skin-pink', 'skin-dark', 'skin-light']
         }
     },
     created() {
+		this.isAdded = this.curBook.isInShelf;
         if (!this.skinBgList.includes(this.skinColor)) {
             this.SET_SKIN_COLOR('skin-default');
         }
@@ -124,7 +131,9 @@ export default {
         ...mapMutations([
             'SET_NIGHT_MODE',
             'SET_SKIN_COLOR',
-            'SET_FONT_SIZE'
+            'SET_FONT_SIZE',
+			'SET_CUR_BOOK',
+			'ADD_TO_SHELF'
         ]),
         showMenu: function () {
             this.isShowOpt = this.isShowSet = false;
@@ -145,7 +154,7 @@ export default {
             this.isShowSet = true;
         },
         changeFontSize(isAdd) {
-            if ((this.fontSize >= 24 && isAdd) || (this.fontSize <= 10 && !isAdd)) {
+            if ((this.fontSize >= 30 && isAdd) || (this.fontSize <= 10 && !isAdd)) {
                 return;
             }
             let size = this.fontSize;
@@ -155,7 +164,17 @@ export default {
         changeBkColor(skin) {
             this.SET_NIGHT_MODE(false);
             this.SET_SKIN_COLOR(skin);
-        }
+        },
+		addToShelf: function() {
+            if (this.isAdded) {
+                return;
+            }
+			let book = this.curBook;
+			book.isInShelf = true;
+			this.SET_CUR_BOOK(book);
+			this.ADD_TO_SHELF(book);
+			this.isAdded = true;
+		}
     }
 }
 </script>
@@ -189,6 +208,23 @@ export default {
                 height: 24px;
             }
         }
+    }
+
+    .read-join-shelf {
+        position: fixed;
+        top: 50px;
+        right: 0;
+        height: 30px;
+        width: 70px;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 15px 0 0 15px;
+        overflow: hidden;
+        color: #fff;
+        background-color: rgba(0, 0, 0, .9);
+        transform: translateX(100%);
+        transition: transform .15s;
+        z-index: 99;
     }
 
     .read-content-content {
@@ -337,7 +373,7 @@ export default {
         }
     }
     .read-opt {
-        transform: translateY(0%);
+        transform: translate(0%, 0%);
         opacity: 1;
     }
 

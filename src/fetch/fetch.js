@@ -1,8 +1,8 @@
 import axios from 'axios';
 import qs from 'qs';
 
+// 需要使用代理来解决跨域问题
 // axios.defaults.baseURL = 'http://api.zhuishushenqi.com';
-// axios.defaults.baseURL = '/api';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.timeout = 20000;
 

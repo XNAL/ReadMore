@@ -29,6 +29,10 @@ export default {
 		if (initSearchHistory) {
 			state.searchHistory = JSON.parse(initSearchHistory);
 		}
+
+		state.nightMode = getStore('NIGHTMODE');
+		state.fontSize = getStore('FONTSIZE');
+		state.skinColor = getStore('SKINCOLOR');
 	},
 
 	[SET_HEADER_INFO](state, {
@@ -74,6 +78,7 @@ export default {
 					break;
 				}
 			}
+			setStore('SHEFLBOOK', state.shelfBookList);
 		}
 	},
 	[SET_CUR_BOOK](state, book) {

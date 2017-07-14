@@ -2,7 +2,7 @@
 <section class="list-section" ref="list">
 	<backbar :title="title"></backbar>
 	<book-list :book-list="list" v-if="list.length > 0"></book-list>
-	<div class="no-more" v-if="!isEnding">没有更多了</div>
+	<div class="no-more" v-if="isEnding">没有更多了</div>
 	<list-loading v-show="isLoading"></list-loading>
 </section>
 </template>
@@ -62,6 +62,7 @@ export default {
 	methods: {
 		fetchData: function() {
 			if (this.headerType === BOOK_PAGE) {
+				console.log('book', 1);
 				api.getRecommend(this.id)
 					.then(data => {
 						this.list = data;
@@ -73,6 +74,9 @@ export default {
 			} else {
 				api.getBookList(this.id, this.page)
 					.then(data => {
+						if (data.length === 0) {
+							return [];
+						}
 						this.title = data[0].node.title;
 						data = data.map(value => {
 							return value.book;
