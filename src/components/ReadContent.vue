@@ -246,7 +246,7 @@ export default {
         }
         .content-list {
             h3 {
-                margin: 30px 0 20px; // line-height: 40px;
+                margin: 30px 0 20px;
                 font-size: 20px;
             }
             p {
@@ -274,7 +274,7 @@ export default {
         right: 0;
         bottom: 50px;
         font-size: 14px;
-        overflow: hidden; // transform: translateY(100%);
+        overflow: hidden;
         opacity: 0;
         transition: opacity .15s;
         color: #fff;

@@ -30,8 +30,8 @@ export default {
 			state.searchHistory = JSON.parse(initSearchHistory);
 		}
 
-		state.nightMode = getStore('NIGHTMODE');
-		state.fontSize = getStore('FONTSIZE');
+		state.nightMode = getStore('NIGHTMODE') === 'true' ? true : false;
+		state.fontSize = Number.isInteger(getStore('FONTSIZE')) ? parseInt(getStore('FONTSIZE')) : 14;
 		state.skinColor = getStore('SKINCOLOR');
 	},
 

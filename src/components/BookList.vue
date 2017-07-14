@@ -120,7 +120,8 @@ export default {
             .book-title {
                 color: #333;
                 line-height: 1;
-                margin: 5px 0 8px;
+                padding-top: 5px;
+                margin-bottom: 8px;
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 overflow: hidden;
