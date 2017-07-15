@@ -23,7 +23,7 @@
 		</svg>
 	</div>
 	<div class="book-menu">
-		<router-link :to="{ name: '', params: {} }">
+		<router-link :to="{ name: 'read', params: { id: book._id }, query: { menu: true } }">
 			<div class="menu-title fl">目录</div>
 			<p class="menu-content fr gray">
 				{{ book.updated | time }}

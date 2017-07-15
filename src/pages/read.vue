@@ -41,6 +41,7 @@ export default {
 			bookId: '',
 			chapters: [],
 			isShowChapters: false,
+			isFromMenu: false,
 			readContent: [],
 			isLoading: true,
 			isEnding: false,
@@ -91,6 +92,10 @@ export default {
 			}
 		}
 		this.fetchChapters(this.bookId);
+		if(this.$route.query.menu) {
+			this.isFromMenu = true;
+			this.isShowChapters = true;
+		}
 	},
 	methods: {
 		...mapMutations([
@@ -120,6 +125,10 @@ export default {
 			this.isShowChapters = true;
 		},
 		hideMenu: function() {
+			console.log(this.isFromMenu);
+			if(this.isFromMenu) {
+				this.$router.go(-1);
+			}
 			this.isShowChapters = false;
 		},
 		nextChapter: function() {
@@ -131,6 +140,9 @@ export default {
 			this.fetchChapterContent(this.chapters[this.readIndex].id);
 		},
 		selectChapter: function(chapterId) {
+			if(this.isFromMenu) {
+				this.isFromMenu = false;
+			}
 			this.isShowChapters = false;
 			this.isShowPageLoading = true;
 			for (let [index, value] of Object.entries(this.chapters)) {
@@ -153,7 +165,7 @@ export default {
 		}
 	},
 	beforeRouteLeave(to, from, next) {
-		if (!this.curBook.isInShelf) {
+		if (!this.curBook.isInShelf && !this.isFromMenu) {
 			this.showDialog = true;
 			this.$refs.dialog.confirm().then(() => {
 				this.showDialog = false;
