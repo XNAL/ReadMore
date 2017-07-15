@@ -183,7 +183,8 @@ export default {
 .read-content {
     position: relative;
     overflow: hidden;
-    color: rgba(0, 0, 0, .85);
+    color: rgba(0, 0, 0, .85);    
+    min-height: 100%;
 
     .read-content-header {
         position: fixed;
@@ -230,7 +231,7 @@ export default {
     .read-content-content {
         position: relative;
         overflow: hidden;
-        padding: 10px 15px 20px;
+        padding: 10px 15px 80px;
         font-size: 14px;
         h4 {
             font-size: 12px;
@@ -257,8 +258,10 @@ export default {
             }
         }
         button.nextChapter {
+            position: absolute;
+            bottom: 20px;
+            left: 10%;
             display: block;
-            margin: 20px auto 0;
             width: 80%;
             font-size: 16px;
             line-height: 36px;
@@ -266,6 +269,7 @@ export default {
             border-radius: 100px;
             color: #fff;
             background-color: #ed424b;
+            z-index: 9999;
         }
     }
     .read-content-set {
@@ -276,6 +280,7 @@ export default {
         font-size: 14px;
         overflow: hidden;
         opacity: 0;
+        display: none;
         transition: opacity .15s;
         color: #fff;
         background-color: rgba(0, 0, 0, .9);
@@ -352,7 +357,7 @@ export default {
         background-color: rgba(0, 0, 0, .9);
         transform: translateY(100%);
         transition: transform .15s;
-        z-index: 99;
+        z-index: 9999;
 
         .footer-tab {
             position: relative;
@@ -375,15 +380,16 @@ export default {
     .read-opt {
         transform: translate(0%, 0%);
         opacity: 1;
+        display: block;
     }
 
     .read-action-mid {
         position: fixed;
-        width: 40%;
+        width: 60%;
         height: 40%;
         top: 30%;
-        left: 30%;
-        z-index: 10000;
+        left: 20%;
+        z-index: 1000;
     }
 }
 

@@ -110,10 +110,10 @@ export default {
 		},
 		fetchChapterContent(chapterId) {
 			api.getChapterContent(chapterId)
-				.then(data => {
+				.then(data => { 
 					this.readContent.push({
 						contentTitle: data.title,
-						contentList: data.cpContent.split('\n')
+						contentList: data.isVip ? ['vip章节，请到正版网站阅读'] : data.cpContent.split('\n')
 					});
 					this.isLoading = false;
 					this.$nextTick(function() {
@@ -156,7 +156,7 @@ export default {
 					this.readContent.splice(0, this.readContent.length);
 					this.readContent.push({
 						contentTitle: data.title,
-						contentList: data.cpContent.split('\n')
+						contentList: data.isVip ? ['vip章节，请到正版网站阅读'] : data.cpContent.split('\n')
 					});
 					this.$nextTick(function() {
 						this.isShowPageLoading = false;
@@ -170,7 +170,6 @@ export default {
 			this.$refs.dialog.confirm().then(() => {
 				this.showDialog = false;
                 let book = this.curBook;
-                console.log('this.curBook', book)
     			book.isInShelf = true;
     			this.SET_CUR_BOOK(book);
     			this.ADD_TO_SHELF(book);
