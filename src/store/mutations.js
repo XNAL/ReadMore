@@ -117,8 +117,8 @@ export default {
 		setStore('SEARCHHISTORY', state.searchHistory);
 	},
 
-	[CLEAR_SEARCH_HISTORY]() {
-		state.searchHistory.clear();
+	[CLEAR_SEARCH_HISTORY](state) {
+		state.searchHistory.splice(0, state.searchHistory.length);
 		removeStore('SEARCHHISTORY');
 	},
 }

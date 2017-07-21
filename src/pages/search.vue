@@ -7,7 +7,7 @@
             </svg>
 		</span>
 		<div class="search-input-section">
-			<input type="text" class="search-input" ref="searchInput" placeholder="请输入您要搜索的关键字">
+			<input type="text" class="search-input" ref="searchInput" placeholder="请输入您要搜索的关键字" @keyup.enter="searchByKeyword">
 			<span class="search-icon" @click="searchByKeyword">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-search"></use>
@@ -24,7 +24,7 @@
 			</ul>
 		</section>
 		<section class="search-history search-section">
-			<h4>历史搜索<span class="clear-all">清空</span></h4>
+			<h4>历史搜索<span class="clear-all" @click="clearAll">清空</span></h4>
 			<ul class="search-keyword-list">
 				<li class="search-keyword" v-for="history in searchHistory">{{ history }}</li>
 			</ul>
@@ -68,13 +68,16 @@ export default {
 			'SET_SEARCH_HISTORY',
 			'CLEAR_SEARCH_HISTORY'
 		]),
-		searchByKeyword: function() {
+		searchByKeyword: function () {
 			let keyword = this.$refs.searchInput.value;
 			this.SET_SEARCH_HISTORY(keyword);
 			api.searchByKeyword(keyword)
 				.then(data => {
 					this.searchBooks = data;
 				})
+		},
+		clearAll: function () {
+			this.CLEAR_SEARCH_HISTORY();
 		}
 	}
 }
