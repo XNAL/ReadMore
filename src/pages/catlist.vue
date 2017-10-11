@@ -37,6 +37,7 @@ export default {
 			minor: '',
 			isLoading: true,
 			isEnding: false,
+			$docElement: null,
 			$body: null,
 			$list: null,
 			clientHeight: 0
@@ -48,6 +49,7 @@ export default {
 		this.fetchData();
 	},
 	mounted() {
+		this.$docElement = document.documentElement;
 		this.$body = document.body;
 		this.clientHeight = this.$body.clientHeight;
 		this.$list = this.$refs.catList;
@@ -65,7 +67,7 @@ export default {
 				})
 		},
 		loadMore: function() {
-			let scrollTop = this.$body.scrollTop;
+            let scrollTop = this.$body.scrollTop + this.$docElement.scrollTop;
 			let offsetHeight = this.$list.offsetHeight;
 			if (offsetHeight - scrollTop - this.clientHeight < 160) {
 				if (this.isEnding === true) {

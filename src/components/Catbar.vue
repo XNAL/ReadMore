@@ -67,6 +67,7 @@ export default {
 			minorList: ['全部'],
 			selectedMinor: '全部',
 			isBrief: false,
+			$docElement: null,
 			$body: null
 		}
 	},
@@ -82,12 +83,13 @@ export default {
 			})
 	},
 	mounted() {
+		this.$docElement = document.documentElement;
 		this.$body = document.body;
 		window.addEventListener('scroll', debounce(this.showBrief));
 	},
 	methods: {
 		showBrief: function() {
-			if (this.$body.scrollTop > 40) {
+			if ((this.$body.scrollTop + this.$docElement.scrollTop) > 40) {
 				this.isBrief = true;
 			} else {
 				this.isBrief = false;

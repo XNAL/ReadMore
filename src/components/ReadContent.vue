@@ -270,6 +270,7 @@ export default {
             color: #fff;
             background-color: #ed424b;
             z-index: 9999;
+            outline: none;
         }
     }
     .read-content-set {
