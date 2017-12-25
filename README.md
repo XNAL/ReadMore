@@ -12,7 +12,7 @@ vue2 + vuex + vue-router + webpack + ES6 + axios + sass
 - [请访问地址：http://www.tdon.site/read-more/](http://www.tdon.site/read-more/)（pc端请用chrome手机模式预览）        
 - 扫描下面的二维码
 
-![二维码](https://github.com/XNAL/ReadMore/blob/master/screenshorts/qrcode.png)
+![二维码](https://github.com/XNAL/ReadMore/blob/master/screenshorts/new-qrcode.png)
 
 ## 项目运行
 
