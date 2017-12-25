@@ -8,6 +8,12 @@ vue2 + vuex + vue-router + webpack + ES6 + axios + sass
 ## 源码地址
 [https://github.com/XNAL/ReadMore](https://github.com/XNAL/ReadMore) 
 
+## 访问地址
+- [请访问地址：http://www.tdon.site/read-more/](http://www.tdon.site/read-more/)（pc端请用chrome手机模式预览）        
+- 扫描下面的二维码
+
+![二维码](https://github.com/XNAL/ReadMore/blob/master/screenshorts/qrcode.png)
+
 ## 项目运行
 
 ```   
@@ -78,50 +84,44 @@ location @router {                          //增加的内容
 }                                           //增加的内容
 ````
 
-## 访问地址
-- [请访问地址：http://www.qdnote.com](http://www.qdnote.com)（pc端请用chrome手机模式预览）        
-- 扫描下面的二维码
-
-<img src="https://github.com/XNAL/ReadMore/blob/master/screenshorts/QRcode.png" width="279" height="250"/>
-
 ## 部分截图
 
 #### 我的书架
 
-<img src="https://github.com/XNAL/ReadMore/blob/master/screenshorts/shelf-01.png" width="470" height="835"/>
+![我的书架](https://github.com/XNAL/ReadMore/blob/master/screenshorts/shelf-01.png)
 
 
-<img src="https://github.com/XNAL/ReadMore/blob/master/screenshorts/shelf-02.png" width="470" height="835"/>
+![我的书架](https://github.com/XNAL/ReadMore/blob/master/screenshorts/shelf-02.png)
 
 #### 精选
 
-<img src="https://github.com/XNAL/ReadMore/blob/master/screenshorts/featured.png" width="470" height="835"/>
+![精选](https://github.com/XNAL/ReadMore/blob/master/screenshorts/featured.png)
 
 #### 分类
 
-<img src="https://github.com/XNAL/ReadMore/blob/master/screenshorts/category.png" width="470" height="835"/>
-<img src="https://github.com/XNAL/ReadMore/blob/master/screenshorts/category-02.png" width="470" height="835"/>
-<img src="https://github.com/XNAL/ReadMore/blob/master/screenshorts/category-03.png" width="470" height="835"/>
+![分类](https://github.com/XNAL/ReadMore/blob/master/screenshorts/category.png)
+![分类](https://github.com/XNAL/ReadMore/blob/master/screenshorts/category-02.png)
+![分类](https://github.com/XNAL/ReadMore/blob/master/screenshorts/category-03.png)
 
 #### 排行
 
-<img src="https://github.com/XNAL/ReadMore/blob/master/screenshorts/rank.png" width="470" height="835"/>
+![排行](https://github.com/XNAL/ReadMore/blob/master/screenshorts/rank.png)
 
 #### 书籍详情
 
-<img src="https://github.com/XNAL/ReadMore/blob/master/screenshorts/book.png" width="470" height="835"/>
+![书籍详情](https://github.com/XNAL/ReadMore/blob/master/screenshorts/book.png)
 
 #### 看书
 
-<img src="https://github.com/XNAL/ReadMore/blob/master/screenshorts/read-01.png" width="470" height="835"/>
-<img src="https://github.com/XNAL/ReadMore/blob/master/screenshorts/read-02.png" width="470" height="835"/>
-<img src="https://github.com/XNAL/ReadMore/blob/master/screenshorts/read-03.png" width="470" height="835"/>
-<img src="https://github.com/XNAL/ReadMore/blob/master/screenshorts/read-04.png" width="470" height="835"/>
+![看书](https://github.com/XNAL/ReadMore/blob/master/screenshorts/read-01.png)
+![看书](https://github.com/XNAL/ReadMore/blob/master/screenshorts/read-02.png)
+![看书](https://github.com/XNAL/ReadMore/blob/master/screenshorts/read-03.png)
+![看书](https://github.com/XNAL/ReadMore/blob/master/screenshorts/read-04.png)
 
 #### 搜索
 
-<img src="https://github.com/XNAL/ReadMore/blob/master/screenshorts/search.png" width="470" height="835"/>
-<img src="https://github.com/XNAL/ReadMore/blob/master/screenshorts/search-02.png" width="470" height="835"/>
+![搜索](https://github.com/XNAL/ReadMore/blob/master/screenshorts/search.png)
+![搜索](https://github.com/XNAL/ReadMore/blob/master/screenshorts/search-02.png)
 
 
 
